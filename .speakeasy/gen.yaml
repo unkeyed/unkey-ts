@@ -18,12 +18,13 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 typescript:
-  version: 0.1.1
+  version: 0.3.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
-  additionalPackageJSON: {}
+  additionalPackageJSON:
+    license: MIT
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
@@ -49,6 +50,6 @@ typescript:
   moduleFormat: dual
   outputModelSuffix: output
   packageName: "@unkey/api"
-  responseFormat: flat
+  responseFormat: envelope
   templateVersion: v2
   useIndexModules: true

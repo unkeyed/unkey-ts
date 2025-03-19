@@ -2,7 +2,9 @@
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.ratelimit.limit({

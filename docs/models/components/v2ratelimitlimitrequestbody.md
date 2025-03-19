@@ -7,9 +7,9 @@ import { V2RatelimitLimitRequestBody } from "@unkey/api/models/components";
 
 let value: V2RatelimitLimitRequestBody = {
   namespace: "sms.sign_up",
-  duration: 544883,
+  duration: 925597,
   identifier: "<value>",
-  limit: 423655,
+  limit: 71036,
 };
 ```
 

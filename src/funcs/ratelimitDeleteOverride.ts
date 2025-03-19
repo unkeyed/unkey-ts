@@ -8,6 +8,7 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import { APIError } from "../models/errors/apierror.js";
@@ -20,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -29,7 +31,7 @@ export function ratelimitDeleteOverride(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.V2RatelimitDeleteOverrideResponseBody,
+    operations.RatelimitDeleteOverrideResponse,
     | errors.BadRequestError
     | errors.UnauthorizedError
     | errors.ForbiddenError
@@ -58,7 +60,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.V2RatelimitDeleteOverrideResponseBody,
+      operations.RatelimitDeleteOverrideResponse,
       | errors.BadRequestError
       | errors.UnauthorizedError
       | errors.ForbiddenError
@@ -96,14 +98,18 @@ async function $do(
     Accept: "application/json",
   }));
 
+  const secConfig = await extractSecurity(client._options.rootKey);
+  const securityInput = secConfig == null ? {} : { rootKey: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "ratelimit.deleteOverride",
     oAuth2Scopes: [],
 
-    resolvedSecurity: null,
+    resolvedSecurity: requestSecurity,
 
-    securitySource: null,
+    securitySource: client._options.rootKey,
     retryConfig: options?.retries
       || client._options.retryConfig
       || {
@@ -121,6 +127,7 @@ async function $do(
   };
 
   const requestRes = client._createRequest(context, {
+    security: requestSecurity,
     method: "POST",
     baseURL: options?.serverURL,
     path: path,
@@ -145,11 +152,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    components.V2RatelimitDeleteOverrideResponseBody,
+    operations.RatelimitDeleteOverrideResponse,
     | errors.BadRequestError
     | errors.UnauthorizedError
     | errors.ForbiddenError
@@ -163,7 +174,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.V2RatelimitDeleteOverrideResponseBody$inboundSchema),
+    M.json(200, operations.RatelimitDeleteOverrideResponse$inboundSchema, {
+      key: "V2RatelimitDeleteOverrideResponseBody",
+    }),
     M.jsonErr(400, errors.BadRequestError$inboundSchema, {
       ctype: "application/problem+json",
     }),

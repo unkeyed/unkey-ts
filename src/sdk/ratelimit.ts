@@ -8,13 +8,17 @@ import { ratelimitLimit } from "../funcs/ratelimitLimit.js";
 import { ratelimitSetOverride } from "../funcs/ratelimitSetOverride.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
+import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Ratelimit extends ClientSDK {
+  /**
+   * TODO
+   */
   async limit(
     request: components.V2RatelimitLimitRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2RatelimitLimitResponseBody> {
+  ): Promise<operations.V1RatelimitLimitResponse> {
     return unwrapAsync(ratelimitLimit(
       this,
       request,
@@ -25,7 +29,7 @@ export class Ratelimit extends ClientSDK {
   async setOverride(
     request: components.V2RatelimitSetOverrideRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2RatelimitSetOverrideResponseBody> {
+  ): Promise<operations.RatelimitSetOverrideResponse> {
     return unwrapAsync(ratelimitSetOverride(
       this,
       request,
@@ -36,7 +40,7 @@ export class Ratelimit extends ClientSDK {
   async getOverride(
     request: components.V2RatelimitGetOverrideRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2RatelimitGetOverrideResponseBody> {
+  ): Promise<operations.RatelimitGetOverrideResponse> {
     return unwrapAsync(ratelimitGetOverride(
       this,
       request,
@@ -47,7 +51,7 @@ export class Ratelimit extends ClientSDK {
   async deleteOverride(
     request: components.V2RatelimitDeleteOverrideRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2RatelimitDeleteOverrideResponseBody> {
+  ): Promise<operations.RatelimitDeleteOverrideResponse> {
     return unwrapAsync(ratelimitDeleteOverride(
       this,
       request,

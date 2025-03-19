@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 4ae464f3-5455-4bce-932c-85c7fc085db8
 management:
-  docChecksum: cd8b8ff5aaa77dc1d90f5bc0387dcc5e
+  docChecksum: 862a690aaea14d7659a63d02653f894c
   docVersion: 2.0.0
   speakeasyVersion: 1.520.1
   generationVersion: 2.556.1
-  releaseVersion: 0.1.1
-  configChecksum: c9234b8a583b8adb2293002092dd2926
+  releaseVersion: 0.3.2
+  configChecksum: dcae2226646a32b802eb805fe1a23f4e
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -15,9 +15,11 @@ features:
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
+    examples: 2.81.5
+    globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
-    mcpServer: 0.9.0
     nameOverrides: 2.81.2
     responseFormat: 0.2.3
     retries: 2.83.0
@@ -32,6 +34,7 @@ generatedFiles:
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
+  - docs/models/components/security.md
   - docs/models/components/v2livenessresponsebody.md
   - docs/models/components/v2ratelimitdeleteoverriderequestbody.md
   - docs/models/components/v2ratelimitdeleteoverrideresponsebody.md
@@ -48,6 +51,11 @@ generatedFiles:
   - docs/models/errors/notfounderror.md
   - docs/models/errors/preconditionfailederror.md
   - docs/models/errors/unauthorizederror.md
+  - docs/models/operations/livenessresponse.md
+  - docs/models/operations/ratelimitdeleteoverrideresponse.md
+  - docs/models/operations/ratelimitgetoverrideresponse.md
+  - docs/models/operations/ratelimitsetoverrideresponse.md
+  - docs/models/operations/v1ratelimitlimitresponse.md
   - docs/sdks/liveness/README.md
   - docs/sdks/ratelimit/README.md
   - docs/sdks/unkey/README.md
@@ -80,25 +88,8 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
-  - src/mcp-server/build.mts
-  - src/mcp-server/cli.ts
-  - src/mcp-server/cli/start/command.ts
-  - src/mcp-server/cli/start/impl.ts
-  - src/mcp-server/console-logger.ts
-  - src/mcp-server/extensions.ts
-  - src/mcp-server/mcp-server.ts
-  - src/mcp-server/prompts.ts
-  - src/mcp-server/resources.ts
-  - src/mcp-server/scopes.ts
-  - src/mcp-server/server.ts
-  - src/mcp-server/shared.ts
-  - src/mcp-server/tools.ts
-  - src/mcp-server/tools/livenessCheck.ts
-  - src/mcp-server/tools/ratelimitDeleteOverride.ts
-  - src/mcp-server/tools/ratelimitGetOverride.ts
-  - src/mcp-server/tools/ratelimitLimit.ts
-  - src/mcp-server/tools/ratelimitSetOverride.ts
   - src/models/components/index.ts
+  - src/models/components/security.ts
   - src/models/components/v2livenessresponsebody.ts
   - src/models/components/v2ratelimitdeleteoverriderequestbody.ts
   - src/models/components/v2ratelimitdeleteoverrideresponsebody.ts
@@ -119,6 +110,12 @@ generatedFiles:
   - src/models/errors/preconditionfailederror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/errors/unauthorizederror.ts
+  - src/models/operations/index.ts
+  - src/models/operations/liveness.ts
+  - src/models/operations/ratelimitdeleteoverride.ts
+  - src/models/operations/ratelimitgetoverride.ts
+  - src/models/operations/ratelimitsetoverride.ts
+  - src/models/operations/v1ratelimitlimit.ts
   - src/sdk/index.ts
   - src/sdk/liveness.ts
   - src/sdk/ratelimit.ts

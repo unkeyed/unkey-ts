@@ -6,9 +6,9 @@
 import { V2RatelimitLimitResponseBody } from "@unkey/api/models/components";
 
 let value: V2RatelimitLimitResponseBody = {
-  limit: 548814,
-  remaining: 715190,
-  reset: 602763,
+  limit: 791725,
+  remaining: 528895,
+  reset: 568045,
   success: false,
 };
 ```

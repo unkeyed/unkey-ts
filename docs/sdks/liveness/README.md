@@ -16,7 +16,9 @@ This endpoint checks if the service is alive.
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.liveness.check();
@@ -38,7 +40,9 @@ import { livenessCheck } from "@unkey/api/funcs/livenessCheck.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const unkey = new UnkeyCore();
+const unkey = new UnkeyCore({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const res = await livenessCheck(unkey);
@@ -66,7 +70,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2LivenessResponseBody](../../models/components/v2livenessresponsebody.md)\>**
+**Promise\<[operations.LivenessResponse](../../models/operations/livenessresponse.md)\>**
 
 ### Errors
 

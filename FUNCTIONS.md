@@ -25,7 +25,9 @@ import { SDKValidationError } from "@unkey/api/models/errors/sdkvalidationerror.
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const unkey = new UnkeyCore();
+const unkey = new UnkeyCore({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const res = await ratelimitLimit(unkey, {

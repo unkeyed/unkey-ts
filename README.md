@@ -27,6 +27,7 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
   * [Retries](#retries)
@@ -78,88 +79,6 @@ yarn add <UNSET> zod
 
 > [!NOTE]
 > This package is published with CommonJS and ES Modules (ESM) support.
-
-
-### Model Context Protocol (MCP) Server
-
-This SDK is also an installable MCP server where the various SDK methods are
-exposed as tools that can be invoked by AI applications.
-
-> Node.js v20 or greater is required to run the MCP server from npm.
-
-<details>
-<summary>Claude installation steps</summary>
-
-Add the following server definition to your `claude_desktop_config.json` file:
-
-```json
-{
-  "mcpServers": {
-    "Unkey": {
-      "command": "npx",
-      "args": [
-        "-y", "--package", "@unkey/api",
-        "--",
-        "mcp", "start"
-      ]
-    }
-  }
-}
-```
-
-</details>
-
-<details>
-<summary>Cursor installation steps</summary>
-
-Create a `.cursor/mcp.json` file in your project root with the following content:
-
-```json
-{
-  "mcpServers": {
-    "Unkey": {
-      "command": "npx",
-      "args": [
-        "-y", "--package", "@unkey/api",
-        "--",
-        "mcp", "start"
-      ]
-    }
-  }
-}
-```
-
-</details>
-
-You can also run MCP servers as a standalone binary with no additional dependencies. You must pull these binaries from available Github releases:
-
-```bash
-curl -L -o mcp-server \
-    https://github.com/{org}/{repo}/releases/download/{tag}/mcp-server-bun-darwin-arm64 && \
-chmod +x mcp-server
-```
-
-If the repo is a private repo you must add your Github PAT to download a release `-H "Authorization: Bearer {GITHUB_PAT}"`.
-
-
-```json
-{
-  "mcpServers": {
-    "Todos": {
-      "command": "./DOWNLOAD/PATH/mcp-server",
-      "args": [
-        "start"
-      ]
-    }
-  }
-}
-```
-
-For a full list of server arguments, run:
-
-```sh
-npx -y --package @unkey/api -- mcp start --help
-```
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -176,7 +95,9 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.ratelimit.limit({
@@ -195,6 +116,42 @@ run();
 ```
 <!-- End SDK Example Usage [usage] -->
 
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name      | Type | Scheme      | Environment Variable |
+| --------- | ---- | ----------- | -------------------- |
+| `rootKey` | http | HTTP Bearer | `UNKEY_ROOT_KEY`     |
+
+To authenticate with the API the `rootKey` parameter must be set when initializing the SDK client instance. For example:
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "sms.sign_up",
+    duration: 455106,
+    identifier: "<value>",
+    limit: 568662,
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Authentication [security] -->
+
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
@@ -207,7 +164,7 @@ run();
 
 ### [ratelimit](docs/sdks/ratelimit/README.md)
 
-* [limit](docs/sdks/ratelimit/README.md#limit)
+* [limit](docs/sdks/ratelimit/README.md#limit) - TODO
 * [setOverride](docs/sdks/ratelimit/README.md#setoverride)
 * [getOverride](docs/sdks/ratelimit/README.md#getoverride)
 * [deleteOverride](docs/sdks/ratelimit/README.md#deleteoverride)
@@ -234,7 +191,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`livenessCheck`](docs/sdks/liveness/README.md#check) - Liveness check
 - [`ratelimitDeleteOverride`](docs/sdks/ratelimit/README.md#deleteoverride)
 - [`ratelimitGetOverride`](docs/sdks/ratelimit/README.md#getoverride)
-- [`ratelimitLimit`](docs/sdks/ratelimit/README.md#limit)
+- [`ratelimitLimit`](docs/sdks/ratelimit/README.md#limit) - TODO
 - [`ratelimitSetOverride`](docs/sdks/ratelimit/README.md#setoverride)
 
 </details>
@@ -249,7 +206,9 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.ratelimit.limit({
@@ -293,6 +252,7 @@ const unkey = new Unkey({
     },
     retryConnectionErrors: false,
   },
+  rootKey: "UNKEY_ROOT_KEY",
 });
 
 async function run() {
@@ -339,7 +299,9 @@ import {
   UnauthorizedError,
 } from "@unkey/api/models/errors";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   let result;
@@ -432,6 +394,7 @@ import { Unkey } from "@unkey/api";
 
 const unkey = new Unkey({
   serverIdx: 1,
+  rootKey: "UNKEY_ROOT_KEY",
 });
 
 async function run() {
@@ -458,6 +421,7 @@ import { Unkey } from "@unkey/api";
 
 const unkey = new Unkey({
   serverURL: "https://api.unkey.cloud",
+  rootKey: "UNKEY_ROOT_KEY",
 });
 
 async function run() {

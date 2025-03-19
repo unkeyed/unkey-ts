@@ -5,19 +5,23 @@
 
 ### Available Operations
 
-* [limit](#limit)
+* [limit](#limit) - TODO
 * [setOverride](#setoverride)
 * [getOverride](#getoverride)
 * [deleteOverride](#deleteoverride)
 
 ## limit
 
+TODO
+
 ### Example Usage
 
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.ratelimit.limit({
@@ -44,7 +48,9 @@ import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const unkey = new UnkeyCore();
+const unkey = new UnkeyCore({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const res = await ratelimitLimit(unkey, {
@@ -78,7 +84,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2RatelimitLimitResponseBody](../../models/components/v2ratelimitlimitresponsebody.md)\>**
+**Promise\<[operations.V1RatelimitLimitResponse](../../models/operations/v1ratelimitlimitresponse.md)\>**
 
 ### Errors
 
@@ -98,7 +104,9 @@ run();
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.ratelimit.setOverride({
@@ -124,7 +132,9 @@ import { ratelimitSetOverride } from "@unkey/api/funcs/ratelimitSetOverride.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const unkey = new UnkeyCore();
+const unkey = new UnkeyCore({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const res = await ratelimitSetOverride(unkey, {
@@ -157,7 +167,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2RatelimitSetOverrideResponseBody](../../models/components/v2ratelimitsetoverrideresponsebody.md)\>**
+**Promise\<[operations.RatelimitSetOverrideResponse](../../models/operations/ratelimitsetoverrideresponse.md)\>**
 
 ### Errors
 
@@ -177,7 +187,9 @@ run();
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.ratelimit.getOverride({
@@ -201,7 +213,9 @@ import { ratelimitGetOverride } from "@unkey/api/funcs/ratelimitGetOverride.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const unkey = new UnkeyCore();
+const unkey = new UnkeyCore({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const res = await ratelimitGetOverride(unkey, {
@@ -232,7 +246,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2RatelimitGetOverrideResponseBody](../../models/components/v2ratelimitgetoverrideresponsebody.md)\>**
+**Promise\<[operations.RatelimitGetOverrideResponse](../../models/operations/ratelimitgetoverrideresponse.md)\>**
 
 ### Errors
 
@@ -252,7 +266,9 @@ run();
 ```typescript
 import { Unkey } from "@unkey/api";
 
-const unkey = new Unkey();
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const result = await unkey.ratelimit.deleteOverride({
@@ -276,7 +292,9 @@ import { ratelimitDeleteOverride } from "@unkey/api/funcs/ratelimitDeleteOverrid
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const unkey = new UnkeyCore();
+const unkey = new UnkeyCore({
+  rootKey: "UNKEY_ROOT_KEY",
+});
 
 async function run() {
   const res = await ratelimitDeleteOverride(unkey, {
@@ -307,7 +325,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2RatelimitDeleteOverrideResponseBody](../../models/components/v2ratelimitdeleteoverrideresponsebody.md)\>**
+**Promise\<[operations.RatelimitDeleteOverrideResponse](../../models/operations/ratelimitdeleteoverrideresponse.md)\>**
 
 ### Errors
 

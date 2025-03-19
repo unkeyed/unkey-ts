@@ -8,9 +8,9 @@ import { V2RatelimitGetOverrideResponseBody } from "@unkey/api/models/components
 let value: V2RatelimitGetOverrideResponseBody = {
   namespaceId: "<id>",
   overrideId: "<id>",
-  duration: 891773,
+  duration: 832620,
   identifier: "<value>",
-  limit: 963663,
+  limit: 778157,
 };
 ```
 
