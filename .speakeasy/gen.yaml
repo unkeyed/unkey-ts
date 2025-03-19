@@ -2,7 +2,7 @@ configVersion: 2.0.0
 generation:
   devContainers:
     enabled: true
-    schemaPath: ../unkey/go/apps/api/openapi/openapi.json
+    schemaPath: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json
   sdkClassName: Unkey
   maintainOpenAPIOrder: true
   usageSnippets:
@@ -48,7 +48,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: dual
   outputModelSuffix: output
-  packageName: '@unkey/api'
+  packageName: "@unkey/api"
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

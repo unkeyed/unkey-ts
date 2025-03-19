@@ -21,7 +21,7 @@ workflow:
     sources:
         Unkey API:
             inputs:
-                - location: ../unkey/go/apps/api/openapi/openapi.json
+                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             registry:

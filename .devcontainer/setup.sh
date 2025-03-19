@@ -27,4 +27,4 @@ EOL
 echo "$TS_CONFIG_CONTENT" > samples/tsconfig.json
 
 # Generate starter usage sample with speakeasy
-speakeasy generate usage -s ../unkey/go/apps/api/openapi/openapi.json -l typescript -o samples/root.ts
+speakeasy generate usage -s https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json -l typescript -o samples/root.ts
