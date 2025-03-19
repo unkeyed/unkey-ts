@@ -49,7 +49,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: dual
   outputModelSuffix: output
-  packageName: "@unkey/api"
+  packageName: '@unkey/api'
   responseFormat: envelope
   templateVersion: v2
   useIndexModules: true
