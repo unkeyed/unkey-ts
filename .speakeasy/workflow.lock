@@ -1,0 +1,38 @@
+speakeasyVersion: 1.520.1
+sources:
+    Unkey API:
+        sourceNamespace: unkey-api
+        sourceRevisionDigest: sha256:1d8858603bddaa47f09439f53e5422f5e6307e79317ea770eae0db2107b154af
+        sourceBlobDigest: sha256:de3826a944fed82e72b7b6cb1807eb9059ec73039adfb976b470ac54809ed094
+        tags:
+            - latest
+            - 2.0.0
+targets:
+    unkey:
+        source: Unkey API
+        sourceNamespace: unkey-api
+        sourceRevisionDigest: sha256:1d8858603bddaa47f09439f53e5422f5e6307e79317ea770eae0db2107b154af
+        sourceBlobDigest: sha256:de3826a944fed82e72b7b6cb1807eb9059ec73039adfb976b470ac54809ed094
+        codeSamplesNamespace: unkey-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:bb6eeb410ea5711fccea3f7bdc0260620e0f5a049d48675db9ec9aaaf778acdd
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Unkey API:
+            inputs:
+                - location: ../unkey/go/apps/api/openapi/openapi.json
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/unkey/unkey/unkey-api
+    targets:
+        unkey:
+            target: typescript
+            source: Unkey API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/unkey/unkey/unkey-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

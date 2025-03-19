@@ -1,0 +1,55 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/v2/ratelimit.setOverride"]["post"]
+    update:
+      x-speakeasy-name-override: setOverride
+    x-speakeasy-metadata:
+      after: sdk.ratelimit.setOverride()
+      before: sdk.ratelimit.ratelimit.setOverride()
+      created_at: 1742371542648
+      reviewed_at: 1742371766255
+      type: method-name
+  - target: $["paths"]["/v2/ratelimit.getOverride"]["post"]
+    update:
+      x-speakeasy-name-override: getOverride
+    x-speakeasy-metadata:
+      after: sdk.ratelimit.getOverride()
+      before: sdk.ratelimit.ratelimit.getOverride()
+      created_at: 1742371542648
+      reviewed_at: 1742371766255
+      type: method-name
+  - target: $["paths"]["/v2/ratelimit.deleteOverride"]["post"]
+    update:
+      x-speakeasy-name-override: deleteOverride
+    x-speakeasy-metadata:
+      after: sdk.ratelimit.deleteOverride()
+      before: sdk.ratelimit.ratelimit.deleteOverride()
+      created_at: 1742371542648
+      reviewed_at: 1742371766255
+      type: method-name
+  - target: $["paths"]["/v2/liveness"]["get"]
+    update:
+      x-speakeasy-name-override: check
+    x-speakeasy-metadata:
+      after: sdk.liveness.check()
+      before: sdk.liveness.liveness()
+      created_at: 1742371542648
+      reviewed_at: 1742371766255
+      type: method-name
+  - target: $["paths"]["/v2/ratelimit.limit"]["post"]
+    update:
+      x-speakeasy-name-override: limit
+    x-speakeasy-metadata:
+      after: sdk.ratelimit.limit()
+      before: sdk.ratelimit.v1.ratelimit.limit()
+      created_at: 1742371542649
+      reviewed_at: 1742371766255
+      type: method-name
