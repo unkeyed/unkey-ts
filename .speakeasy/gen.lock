@@ -1,12 +1,14 @@
 lockVersion: 2.0.0
 id: 4ae464f3-5455-4bce-932c-85c7fc085db8
 management:
-  docChecksum: 862a690aaea14d7659a63d02653f894c
+  docChecksum: 9c39d1e606b95e3672cda51e9a7791bd
   docVersion: 2.0.0
   speakeasyVersion: 1.520.1
   generationVersion: 2.556.1
-  releaseVersion: 0.3.2
-  configChecksum: dcae2226646a32b802eb805fe1a23f4e
+  releaseVersion: 2.0.0-alpha.0
+  configChecksum: b51f7d782a8a8433eb7f48d0ff8d895b
+  repoURL: https://github.com/unkeyed/unkey-ts.git
+  installationURL: https://github.com/unkeyed/unkey-ts
 features:
   typescript:
     additionalDependencies: 0.1.0
