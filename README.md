@@ -378,49 +378,14 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
-
-You can override the default server globally by passing a server index to the `serverIdx: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| #   | Server                    | Description |
-| --- | ------------------------- | ----------- |
-| 0   | `https://api.unkey.cloud` |             |
-| 1   | `http://localhost`        |             |
-
-#### Example
-
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  serverIdx: 1,
-  rootKey: "UNKEY_ROOT_KEY",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "sms.sign_up",
-    duration: 455106,
-    identifier: "<value>",
-    limit: 568662,
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { Unkey } from "@unkey/api";
 
 const unkey = new Unkey({
-  serverURL: "https://api.unkey.cloud",
+  serverURL: "https://api.unkey.com",
   rootKey: "UNKEY_ROOT_KEY",
 });
 
