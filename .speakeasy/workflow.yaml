@@ -12,6 +12,9 @@ targets:
     unkey:
         target: typescript
         source: Unkey API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/unkey-api-typescript-code-samples
