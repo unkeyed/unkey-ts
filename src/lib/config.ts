@@ -11,8 +11,7 @@ import { Params, pathToFunc } from "./url.js";
  * Contains the list of servers available to the SDK
  */
 export const ServerList = [
-  "https://api.unkey.cloud",
-  "http://localhost",
+  "https://api.unkey.com",
 ] as const;
 
 export type SDKOptions = {
@@ -55,7 +54,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "2.0.0",
-  sdkVersion: "2.0.0-alpha.0",
-  genVersion: "2.556.1",
-  userAgent: "speakeasy-sdk/typescript 2.0.0-alpha.0 2.556.1 2.0.0 @unkey/api",
+  sdkVersion: "2.0.0-alpha.1",
+  genVersion: "2.562.2",
+  userAgent: "speakeasy-sdk/typescript 2.0.0-alpha.1 2.562.2 2.0.0 @unkey/api",
 } as const;
