@@ -84,7 +84,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.V1RatelimitLimitResponse](../../models/operations/v1ratelimitlimitresponse.md)\>**
+**Promise\<[components.V2RatelimitLimitResponseBody](../../models/components/v2ratelimitlimitresponsebody.md)\>**
 
 ### Errors
 
@@ -165,7 +165,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RatelimitSetOverrideResponse](../../models/operations/ratelimitsetoverrideresponse.md)\>**
+**Promise\<[components.V2RatelimitSetOverrideResponseBody](../../models/components/v2ratelimitsetoverrideresponsebody.md)\>**
 
 ### Errors
 
@@ -242,7 +242,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RatelimitGetOverrideResponse](../../models/operations/ratelimitgetoverrideresponse.md)\>**
+**Promise\<[components.V2RatelimitGetOverrideResponseBody](../../models/components/v2ratelimitgetoverrideresponsebody.md)\>**
 
 ### Errors
 
@@ -319,7 +319,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RatelimitDeleteOverrideResponse](../../models/operations/ratelimitdeleteoverrideresponse.md)\>**
+**Promise\<[components.V2RatelimitDeleteOverrideResponseBody](../../models/components/v2ratelimitdeleteoverrideresponsebody.md)\>**
 
 ### Errors
 

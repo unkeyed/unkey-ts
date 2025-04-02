@@ -70,7 +70,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.LivenessResponse](../../models/operations/livenessresponse.md)\>**
+**Promise\<[components.V2LivenessResponseBody](../../models/components/v2livenessresponsebody.md)\>**
 
 ### Errors
 

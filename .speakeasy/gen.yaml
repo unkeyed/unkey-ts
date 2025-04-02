@@ -18,7 +18,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 typescript:
-  version: 2.0.0-alpha.2
+  version: 2.0.0-alpha.5
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -50,6 +50,6 @@ typescript:
   moduleFormat: dual
   outputModelSuffix: output
   packageName: '@unkey/api'
-  responseFormat: envelope-http
+  responseFormat: flat
   templateVersion: v2
   useIndexModules: true

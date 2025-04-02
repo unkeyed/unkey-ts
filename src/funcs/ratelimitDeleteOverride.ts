@@ -21,7 +21,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -31,7 +30,7 @@ export function ratelimitDeleteOverride(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RatelimitDeleteOverrideResponse,
+    components.V2RatelimitDeleteOverrideResponseBody,
     | errors.BadRequestError
     | errors.BaseError
     | errors.BaseError
@@ -58,7 +57,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.RatelimitDeleteOverrideResponse,
+      components.V2RatelimitDeleteOverrideResponseBody,
       | errors.BadRequestError
       | errors.BaseError
       | errors.BaseError
@@ -152,7 +151,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.RatelimitDeleteOverrideResponse,
+    components.V2RatelimitDeleteOverrideResponseBody,
     | errors.BadRequestError
     | errors.BaseError
     | errors.BaseError
@@ -164,9 +163,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.RatelimitDeleteOverrideResponse$inboundSchema, {
-      key: "V2RatelimitDeleteOverrideResponseBody",
-    }),
+    M.json(200, components.V2RatelimitDeleteOverrideResponseBody$inboundSchema),
     M.jsonErr(400, errors.BadRequestError$inboundSchema, {
       ctype: "application/problem+json",
     }),
@@ -178,7 +175,7 @@ async function $do(
     }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req, { extraFields: responseFields });
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

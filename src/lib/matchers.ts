@@ -159,7 +159,6 @@ export type MatchedError<Matchers> = Matchers extends Matcher<any, infer E>[]
   : never;
 export type MatchFunc<T, E> = (
   response: Response,
-  request: Request,
   options?: { resultKey?: string; extraFields?: Record<string, unknown> },
 ) => Promise<[result: Result<T, E>, raw: unknown]>;
 
@@ -168,7 +167,6 @@ export function match<T, E>(
 ): MatchFunc<T, E | APIError | SDKValidationError> {
   return async function matchFunc(
     response: Response,
-    request: Request,
     options?: { resultKey?: string; extraFields?: Record<string, unknown> },
   ): Promise<
     [result: Result<T, E | APIError | SDKValidationError>, raw: unknown]
@@ -190,14 +188,15 @@ export function match<T, E>(
     }
 
     if (!matcher) {
-      await discardResponseBody(response);
+      const responseBody = await response.text();
       return [{
         ok: false,
-        error: new APIError("Unexpected API response status or content-type", {
+        error: new APIError(
+          "Unexpected API response status or content-type",
           response,
-          request,
-        }),
-      }, raw];
+          responseBody,
+        ),
+      }, responseBody];
     }
 
     const encoding = matcher.enc;
@@ -221,7 +220,7 @@ export function match<T, E>(
         raw = await discardResponseBody(response);
         break;
       case "fail":
-        raw = await discardResponseBody(response);
+        raw = await response.text();
         break;
       default:
         encoding satisfies never;
@@ -231,7 +230,11 @@ export function match<T, E>(
     if (matcher.enc === "fail") {
       return [{
         ok: false,
-        error: new APIError("API error occurred", { response, request }),
+        error: new APIError(
+          "API error occurred",
+          response,
+          typeof raw === "string" ? raw : "",
+        ),
       }, raw];
     }
 
@@ -250,11 +253,14 @@ export function match<T, E>(
         ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
         [resultKey]: raw,
       };
-    } else {
+    } else if (matcher.hdrs) {
       data = {
         ...options?.extraFields,
         ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
+        ...(isPlainObject(raw) ? raw : null),
       };
+    } else {
+      data = raw;
     }
 
     if ("err" in matcher) {

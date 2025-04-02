@@ -8,6 +8,7 @@ import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -18,7 +19,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,7 +33,7 @@ export function livenessCheck(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.LivenessResponse,
+    components.V2LivenessResponseBody,
     | errors.BaseError
     | errors.BaseError
     | APIError
@@ -57,7 +57,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.LivenessResponse,
+      components.V2LivenessResponseBody,
       | errors.BaseError
       | errors.BaseError
       | APIError
@@ -134,7 +134,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.LivenessResponse,
+    components.V2LivenessResponseBody,
     | errors.BaseError
     | errors.BaseError
     | APIError
@@ -145,9 +145,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.LivenessResponse$inboundSchema, {
-      key: "V2LivenessResponseBody",
-    }),
+    M.json(200, components.V2LivenessResponseBody$inboundSchema),
     M.jsonErr(412, errors.BaseError$inboundSchema, {
       ctype: "application/problem+json",
     }),
@@ -156,7 +154,7 @@ async function $do(
     }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req, { extraFields: responseFields });
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }
