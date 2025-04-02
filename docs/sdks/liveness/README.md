@@ -74,8 +74,8 @@ run();
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| errors.PreconditionFailedError | 412                            | application/problem+json       |
-| errors.InternalServerError     | 500                            | application/problem+json       |
-| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.BaseError         | 412                      | application/problem+json |
+| errors.BaseError         | 500                      | application/problem+json |
+| errors.APIError          | 4XX, 5XX                 | \*/\*                    |

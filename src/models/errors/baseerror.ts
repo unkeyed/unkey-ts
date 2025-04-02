@@ -4,7 +4,7 @@
 
 import * as z from "zod";
 
-export type UnauthorizedErrorData = {
+export type BaseErrorData = {
   /**
    * A unique id for this request. Please always provide this to support.
    */
@@ -31,7 +31,7 @@ export type UnauthorizedErrorData = {
   type: string;
 };
 
-export class UnauthorizedError extends Error {
+export class BaseError extends Error {
   /**
    * A unique id for this request. Please always provide this to support.
    */
@@ -58,9 +58,9 @@ export class UnauthorizedError extends Error {
   type: string;
 
   /** The original data that was passed to this error instance. */
-  data$: UnauthorizedErrorData;
+  data$: BaseErrorData;
 
-  constructor(err: UnauthorizedErrorData) {
+  constructor(err: BaseErrorData) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
@@ -74,13 +74,13 @@ export class UnauthorizedError extends Error {
     this.title = err.title;
     this.type = err.type;
 
-    this.name = "UnauthorizedError";
+    this.name = "BaseError";
   }
 }
 
 /** @internal */
-export const UnauthorizedError$inboundSchema: z.ZodType<
-  UnauthorizedError,
+export const BaseError$inboundSchema: z.ZodType<
+  BaseError,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -92,11 +92,11 @@ export const UnauthorizedError$inboundSchema: z.ZodType<
   type: z.string(),
 })
   .transform((v) => {
-    return new UnauthorizedError(v);
+    return new BaseError(v);
   });
 
 /** @internal */
-export type UnauthorizedError$Outbound = {
+export type BaseError$Outbound = {
   requestId: string;
   detail: string;
   instance?: string | undefined;
@@ -106,11 +106,11 @@ export type UnauthorizedError$Outbound = {
 };
 
 /** @internal */
-export const UnauthorizedError$outboundSchema: z.ZodType<
-  UnauthorizedError$Outbound,
+export const BaseError$outboundSchema: z.ZodType<
+  BaseError$Outbound,
   z.ZodTypeDef,
-  UnauthorizedError
-> = z.instanceof(UnauthorizedError)
+  BaseError
+> = z.instanceof(BaseError)
   .transform(v => v.data$)
   .pipe(z.object({
     requestId: z.string(),
@@ -125,11 +125,11 @@ export const UnauthorizedError$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UnauthorizedError$ {
-  /** @deprecated use `UnauthorizedError$inboundSchema` instead. */
-  export const inboundSchema = UnauthorizedError$inboundSchema;
-  /** @deprecated use `UnauthorizedError$outboundSchema` instead. */
-  export const outboundSchema = UnauthorizedError$outboundSchema;
-  /** @deprecated use `UnauthorizedError$Outbound` instead. */
-  export type Outbound = UnauthorizedError$Outbound;
+export namespace BaseError$ {
+  /** @deprecated use `BaseError$inboundSchema` instead. */
+  export const inboundSchema = BaseError$inboundSchema;
+  /** @deprecated use `BaseError$outboundSchema` instead. */
+  export const outboundSchema = BaseError$outboundSchema;
+  /** @deprecated use `BaseError$Outbound` instead. */
+  export type Outbound = BaseError$Outbound;
 }

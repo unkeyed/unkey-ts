@@ -4,10 +4,6 @@
 
 export * from "./apierror.js";
 export * from "./badrequesterror.js";
-export * from "./forbiddenerror.js";
+export * from "./baseerror.js";
 export * from "./httpclienterrors.js";
-export * from "./internalservererror.js";
-export * from "./notfounderror.js";
-export * from "./preconditionfailederror.js";
 export * from "./sdkvalidationerror.js";
-export * from "./unauthorizederror.js";

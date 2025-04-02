@@ -8,9 +8,9 @@ Sets a new or overwrites an existing override.
 import { V2RatelimitSetOverrideRequestBody } from "@unkey/api/models/components";
 
 let value: V2RatelimitSetOverrideRequestBody = {
-  duration: 87129,
+  duration: 645894,
   identifier: "<value>",
-  limit: 20218,
+  limit: 437587,
 };
 ```
 

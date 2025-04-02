@@ -10,18 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RatelimitDeleteOverrideResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: components.HTTPMetadata;
   /**
    * OK
    */
@@ -36,16 +25,12 @@ export const RatelimitDeleteOverrideResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: components.HTTPMetadata$inboundSchema,
   V2RatelimitDeleteOverrideResponseBody: components
     .V2RatelimitDeleteOverrideResponseBody$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "V2RatelimitDeleteOverrideResponseBody":
       "v2RatelimitDeleteOverrideResponseBody",
   });
@@ -53,9 +38,7 @@ export const RatelimitDeleteOverrideResponse$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RatelimitDeleteOverrideResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: components.HTTPMetadata$Outbound;
   V2RatelimitDeleteOverrideResponseBody?:
     | components.V2RatelimitDeleteOverrideResponseBody$Outbound
     | undefined;
@@ -67,18 +50,12 @@ export const RatelimitDeleteOverrideResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RatelimitDeleteOverrideResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: components.HTTPMetadata$outboundSchema,
   v2RatelimitDeleteOverrideResponseBody: components
     .V2RatelimitDeleteOverrideResponseBody$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     v2RatelimitDeleteOverrideResponseBody:
       "V2RatelimitDeleteOverrideResponseBody",
   });

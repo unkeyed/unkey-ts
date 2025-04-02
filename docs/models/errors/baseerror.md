@@ -1,9 +1,9 @@
-# UnauthorizedError
+# BaseError
 
 ## Example Usage
 
 ```typescript
-import { UnauthorizedError } from "@unkey/api/models/errors";
+import { BaseError } from "@unkey/api/models/errors";
 
 // No examples available for this model
 ```
