@@ -50,6 +50,6 @@ typescript:
   moduleFormat: dual
   outputModelSuffix: output
   packageName: "@unkey/api"
-  responseFormat: envelope
+  responseFormat: envelope-http
   templateVersion: v2
   useIndexModules: true
