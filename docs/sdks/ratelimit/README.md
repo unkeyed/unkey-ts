@@ -88,14 +88,12 @@ run();
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequestError     | 400                        | application/problem+json   |
-| errors.UnauthorizedError   | 401                        | application/problem+json   |
-| errors.ForbiddenError      | 403                        | application/problem+json   |
-| errors.NotFoundError       | 404                        | application/problem+json   |
-| errors.InternalServerError | 500                        | application/problem+json   |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.BadRequestError   | 400                      | application/problem+json |
+| errors.BaseError         | 401, 403, 404            | application/problem+json |
+| errors.BaseError         | 500                      | application/problem+json |
+| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## setOverride
 
@@ -171,14 +169,12 @@ run();
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequestError     | 400                        | application/problem+json   |
-| errors.UnauthorizedError   | 401                        | application/problem+json   |
-| errors.ForbiddenError      | 403                        | application/problem+json   |
-| errors.NotFoundError       | 404                        | application/problem+json   |
-| errors.InternalServerError | 500                        | application/problem+json   |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.BadRequestError   | 400                      | application/problem+json |
+| errors.BaseError         | 401, 403, 404            | application/problem+json |
+| errors.BaseError         | 500                      | application/problem+json |
+| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## getOverride
 
@@ -250,14 +246,12 @@ run();
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequestError     | 400                        | application/problem+json   |
-| errors.UnauthorizedError   | 401                        | application/problem+json   |
-| errors.ForbiddenError      | 403                        | application/problem+json   |
-| errors.NotFoundError       | 404                        | application/problem+json   |
-| errors.InternalServerError | 500                        | application/problem+json   |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.BadRequestError   | 400                      | application/problem+json |
+| errors.BaseError         | 401, 403, 404            | application/problem+json |
+| errors.BaseError         | 500                      | application/problem+json |
+| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## deleteOverride
 
@@ -329,11 +323,9 @@ run();
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequestError     | 400                        | application/problem+json   |
-| errors.UnauthorizedError   | 401                        | application/problem+json   |
-| errors.ForbiddenError      | 403                        | application/problem+json   |
-| errors.NotFoundError       | 404                        | application/problem+json   |
-| errors.InternalServerError | 500                        | application/problem+json   |
-| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.BadRequestError   | 400                      | application/problem+json |
+| errors.BaseError         | 401, 403, 404            | application/problem+json |
+| errors.BaseError         | 500                      | application/problem+json |
+| errors.APIError          | 4XX, 5XX                 | \*/\*                    |

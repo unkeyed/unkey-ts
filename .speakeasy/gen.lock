@@ -3,12 +3,13 @@ id: 4ae464f3-5455-4bce-932c-85c7fc085db8
 management:
   docChecksum: d32c409ca16bfb64eed3c26906f2835b
   docVersion: 2.0.0
-  speakeasyVersion: 1.524.0
-  generationVersion: 2.562.2
-  releaseVersion: 2.0.0-alpha.1
-  configChecksum: ced7af67912943185c51d929991fe39c
+  speakeasyVersion: 1.527.1
+  generationVersion: 2.564.5
+  releaseVersion: 2.0.0-alpha.2
+  configChecksum: b1983b3119d551c7e7e77d9627b050ce
   repoURL: https://github.com/unkeyed/unkey-ts.git
   installationURL: https://github.com/unkeyed/unkey-ts
+  published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -36,6 +37,7 @@ generatedFiles:
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
+  - docs/models/components/httpmetadata.md
   - docs/models/components/security.md
   - docs/models/components/v2livenessresponsebody.md
   - docs/models/components/v2ratelimitdeleteoverriderequestbody.md
@@ -48,11 +50,7 @@ generatedFiles:
   - docs/models/components/v2ratelimitsetoverrideresponsebody.md
   - docs/models/components/validationerror.md
   - docs/models/errors/badrequesterror.md
-  - docs/models/errors/forbiddenerror.md
-  - docs/models/errors/internalservererror.md
-  - docs/models/errors/notfounderror.md
-  - docs/models/errors/preconditionfailederror.md
-  - docs/models/errors/unauthorizederror.md
+  - docs/models/errors/baseerror.md
   - docs/models/operations/livenessresponse.md
   - docs/models/operations/ratelimitdeleteoverrideresponse.md
   - docs/models/operations/ratelimitgetoverrideresponse.md
@@ -90,6 +88,7 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/models/components/httpmetadata.ts
   - src/models/components/index.ts
   - src/models/components/security.ts
   - src/models/components/v2livenessresponsebody.ts
@@ -104,14 +103,10 @@ generatedFiles:
   - src/models/components/validationerror.ts
   - src/models/errors/apierror.ts
   - src/models/errors/badrequesterror.ts
-  - src/models/errors/forbiddenerror.ts
+  - src/models/errors/baseerror.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
-  - src/models/errors/internalservererror.ts
-  - src/models/errors/notfounderror.ts
-  - src/models/errors/preconditionfailederror.ts
   - src/models/errors/sdkvalidationerror.ts
-  - src/models/errors/unauthorizederror.ts
   - src/models/operations/index.ts
   - src/models/operations/liveness.ts
   - src/models/operations/ratelimitdeleteoverride.ts

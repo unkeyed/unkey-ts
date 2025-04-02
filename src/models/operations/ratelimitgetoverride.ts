@@ -10,18 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RatelimitGetOverrideResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: components.HTTPMetadata;
   /**
    * OK
    */
@@ -36,25 +25,19 @@ export const RatelimitGetOverrideResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: components.HTTPMetadata$inboundSchema,
   V2RatelimitGetOverrideResponseBody: components
     .V2RatelimitGetOverrideResponseBody$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "V2RatelimitGetOverrideResponseBody": "v2RatelimitGetOverrideResponseBody",
   });
 });
 
 /** @internal */
 export type RatelimitGetOverrideResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: components.HTTPMetadata$Outbound;
   V2RatelimitGetOverrideResponseBody?:
     | components.V2RatelimitGetOverrideResponseBody$Outbound
     | undefined;
@@ -66,18 +49,12 @@ export const RatelimitGetOverrideResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RatelimitGetOverrideResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: components.HTTPMetadata$outboundSchema,
   v2RatelimitGetOverrideResponseBody: components
     .V2RatelimitGetOverrideResponseBody$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     v2RatelimitGetOverrideResponseBody: "V2RatelimitGetOverrideResponseBody",
   });
 });

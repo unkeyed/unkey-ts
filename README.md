@@ -44,34 +44,30 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add https://github.com/unkeyed/unkey-ts
+npm add @unkey/api
 ```
 
 ### PNPM
 
 ```bash
-pnpm add https://github.com/unkeyed/unkey-ts
+pnpm add @unkey/api
 ```
 
 ### Bun
 
 ```bash
-bun add https://github.com/unkeyed/unkey-ts
+bun add @unkey/api
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/unkeyed/unkey-ts zod
+yarn add @unkey/api zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -277,14 +273,12 @@ run();
 
 Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `limit` method may throw the following errors:
 
-| Error Type                 | Status Code | Content Type             |
-| -------------------------- | ----------- | ------------------------ |
-| errors.BadRequestError     | 400         | application/problem+json |
-| errors.UnauthorizedError   | 401         | application/problem+json |
-| errors.ForbiddenError      | 403         | application/problem+json |
-| errors.NotFoundError       | 404         | application/problem+json |
-| errors.InternalServerError | 500         | application/problem+json |
-| errors.APIError            | 4XX, 5XX    | \*/\*                    |
+| Error Type             | Status Code   | Content Type             |
+| ---------------------- | ------------- | ------------------------ |
+| errors.BadRequestError | 400           | application/problem+json |
+| errors.BaseError       | 401, 403, 404 | application/problem+json |
+| errors.BaseError       | 500           | application/problem+json |
+| errors.APIError        | 4XX, 5XX      | \*/\*                    |
 
 If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
 
@@ -292,11 +286,8 @@ If the method throws an error and it is not captured by the known errors, it wil
 import { Unkey } from "@unkey/api";
 import {
   BadRequestError,
-  ForbiddenError,
-  InternalServerError,
-  NotFoundError,
+  BaseError,
   SDKValidationError,
-  UnauthorizedError,
 } from "@unkey/api/models/errors";
 
 const unkey = new Unkey({
@@ -330,23 +321,13 @@ async function run() {
         console.error(err);
         return;
       }
-      case (err instanceof UnauthorizedError): {
-        // Handle err.data$: UnauthorizedErrorData
+      case (err instanceof BaseError): {
+        // Handle err.data$: BaseErrorData
         console.error(err);
         return;
       }
-      case (err instanceof ForbiddenError): {
-        // Handle err.data$: ForbiddenErrorData
-        console.error(err);
-        return;
-      }
-      case (err instanceof NotFoundError): {
-        // Handle err.data$: NotFoundErrorData
-        console.error(err);
-        return;
-      }
-      case (err instanceof InternalServerError): {
-        // Handle err.data$: InternalServerErrorData
+      case (err instanceof BaseError): {
+        // Handle err.data$: BaseErrorData
         console.error(err);
         return;
       }

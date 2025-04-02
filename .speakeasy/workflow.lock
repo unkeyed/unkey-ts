@@ -1,21 +1,21 @@
-speakeasyVersion: 1.524.0
+speakeasyVersion: 1.527.1
 sources:
     Unkey API:
         sourceNamespace: unkey-api
-        sourceRevisionDigest: sha256:d1b6923d89a67cd40d106a5a673534fac7099ea32e1917d20ef4bffec86fd417
+        sourceRevisionDigest: sha256:18e88a99a35b022f4fa8aff9625054a11f3925fd921d1a440d84a25024fecc8e
         sourceBlobDigest: sha256:411d7a08cddea23554e812add92b683e49ce24e0ab269bd188bc98ffaf5763d9
         tags:
             - latest
-            - speakeasy-sdk-regen-1742602508
+            - speakeasy-sdk-regen-1743577103
             - 2.0.0
 targets:
     unkey:
         source: Unkey API
         sourceNamespace: unkey-api
-        sourceRevisionDigest: sha256:d1b6923d89a67cd40d106a5a673534fac7099ea32e1917d20ef4bffec86fd417
+        sourceRevisionDigest: sha256:18e88a99a35b022f4fa8aff9625054a11f3925fd921d1a440d84a25024fecc8e
         sourceBlobDigest: sha256:411d7a08cddea23554e812add92b683e49ce24e0ab269bd188bc98ffaf5763d9
         codeSamplesNamespace: unkey-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:d79377e915643475184c0b9f720c57abcacd3801386ae55e1ed4634bda7ffde1
+        codeSamplesRevisionDigest: sha256:bd448cfc67388ab278f8ca23c08ee6b25f751ca633162a0d48c6a06851e30b57
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -31,6 +31,9 @@ workflow:
         unkey:
             target: typescript
             source: Unkey API
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/unkey/unkey/unkey-api-typescript-code-samples

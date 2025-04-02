@@ -33,10 +33,8 @@ export function ratelimitDeleteOverride(
   Result<
     operations.RatelimitDeleteOverrideResponse,
     | errors.BadRequestError
-    | errors.UnauthorizedError
-    | errors.ForbiddenError
-    | errors.NotFoundError
-    | errors.InternalServerError
+    | errors.BaseError
+    | errors.BaseError
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -62,10 +60,8 @@ async function $do(
     Result<
       operations.RatelimitDeleteOverrideResponse,
       | errors.BadRequestError
-      | errors.UnauthorizedError
-      | errors.ForbiddenError
-      | errors.NotFoundError
-      | errors.InternalServerError
+      | errors.BaseError
+      | errors.BaseError
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -105,7 +101,7 @@ async function $do(
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "ratelimit.deleteOverride",
-    oAuth2Scopes: null,
+    oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
 
@@ -152,20 +148,14 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    ContentType: response.headers.get("content-type")
-      ?? "application/octet-stream",
-    StatusCode: response.status,
-    RawResponse: response,
-    Headers: {},
+    HttpMeta: { Response: response, Request: req },
   };
 
   const [result] = await M.match<
     operations.RatelimitDeleteOverrideResponse,
     | errors.BadRequestError
-    | errors.UnauthorizedError
-    | errors.ForbiddenError
-    | errors.NotFoundError
-    | errors.InternalServerError
+    | errors.BaseError
+    | errors.BaseError
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -180,21 +170,15 @@ async function $do(
     M.jsonErr(400, errors.BadRequestError$inboundSchema, {
       ctype: "application/problem+json",
     }),
-    M.jsonErr(401, errors.UnauthorizedError$inboundSchema, {
+    M.jsonErr([401, 403, 404], errors.BaseError$inboundSchema, {
       ctype: "application/problem+json",
     }),
-    M.jsonErr(403, errors.ForbiddenError$inboundSchema, {
-      ctype: "application/problem+json",
-    }),
-    M.jsonErr(404, errors.NotFoundError$inboundSchema, {
-      ctype: "application/problem+json",
-    }),
-    M.jsonErr(500, errors.InternalServerError$inboundSchema, {
+    M.jsonErr(500, errors.BaseError$inboundSchema, {
       ctype: "application/problem+json",
     }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }
