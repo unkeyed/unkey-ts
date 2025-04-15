@@ -6,12 +6,22 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  Meta,
+  Meta$inboundSchema,
+  Meta$Outbound,
+  Meta$outboundSchema,
+} from "./meta.js";
+import {
+  RatelimitSetOverrideResponseData,
+  RatelimitSetOverrideResponseData$inboundSchema,
+  RatelimitSetOverrideResponseData$Outbound,
+  RatelimitSetOverrideResponseData$outboundSchema,
+} from "./ratelimitsetoverrideresponsedata.js";
 
 export type V2RatelimitSetOverrideResponseBody = {
-  /**
-   * The id of the override. This is used internally.
-   */
-  overrideId: string;
+  meta: Meta;
+  data: RatelimitSetOverrideResponseData;
 };
 
 /** @internal */
@@ -20,12 +30,14 @@ export const V2RatelimitSetOverrideResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  overrideId: z.string(),
+  meta: Meta$inboundSchema,
+  data: RatelimitSetOverrideResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2RatelimitSetOverrideResponseBody$Outbound = {
-  overrideId: string;
+  meta: Meta$Outbound;
+  data: RatelimitSetOverrideResponseData$Outbound;
 };
 
 /** @internal */
@@ -34,7 +46,8 @@ export const V2RatelimitSetOverrideResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2RatelimitSetOverrideResponseBody
 > = z.object({
-  overrideId: z.string(),
+  meta: Meta$outboundSchema,
+  data: RatelimitSetOverrideResponseData$outboundSchema,
 });
 
 /**

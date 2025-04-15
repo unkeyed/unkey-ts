@@ -6,28 +6,22 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  Meta,
+  Meta$inboundSchema,
+  Meta$Outbound,
+  Meta$outboundSchema,
+} from "./meta.js";
+import {
+  RatelimitLimitResponseData,
+  RatelimitLimitResponseData$inboundSchema,
+  RatelimitLimitResponseData$Outbound,
+  RatelimitLimitResponseData$outboundSchema,
+} from "./ratelimitlimitresponsedata.js";
 
 export type V2RatelimitLimitResponseBody = {
-  /**
-   * The maximum number of requests allowed.
-   */
-  limit: number;
-  /**
-   * The number of requests remaining in the current window.
-   */
-  remaining: number;
-  /**
-   * The time in milliseconds when the rate limit will reset.
-   */
-  reset: number;
-  /**
-   * Whether the request passed the ratelimit. If false, the request must be blocked.
-   */
-  success: boolean;
-  /**
-   * The override that was used. May be empty
-   */
-  overrideId?: string | undefined;
+  meta: Meta;
+  data: RatelimitLimitResponseData;
 };
 
 /** @internal */
@@ -36,20 +30,14 @@ export const V2RatelimitLimitResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  limit: z.number().int(),
-  remaining: z.number().int(),
-  reset: z.number().int(),
-  success: z.boolean(),
-  overrideId: z.string().optional(),
+  meta: Meta$inboundSchema,
+  data: RatelimitLimitResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2RatelimitLimitResponseBody$Outbound = {
-  limit: number;
-  remaining: number;
-  reset: number;
-  success: boolean;
-  overrideId?: string | undefined;
+  meta: Meta$Outbound;
+  data: RatelimitLimitResponseData$Outbound;
 };
 
 /** @internal */
@@ -58,11 +46,8 @@ export const V2RatelimitLimitResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2RatelimitLimitResponseBody
 > = z.object({
-  limit: z.number().int(),
-  remaining: z.number().int(),
-  reset: z.number().int(),
-  success: z.boolean(),
-  overrideId: z.string().optional(),
+  meta: Meta$outboundSchema,
+  data: RatelimitLimitResponseData$outboundSchema,
 });
 
 /**

@@ -182,9 +182,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -218,9 +218,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -238,6 +238,14 @@ run();
 <details open>
 <summary>Available methods</summary>
 
+### [apis](docs/sdks/apis/README.md)
+
+* [createApi](docs/sdks/apis/README.md#createapi)
+
+### [identities](docs/sdks/identities/README.md)
+
+* [v2IdentitiesCreateIdentity](docs/sdks/identities/README.md#v2identitiescreateidentity)
+
 ### [liveness](docs/sdks/liveness/README.md)
 
 * [check](docs/sdks/liveness/README.md#check) - Liveness check
@@ -247,6 +255,7 @@ run();
 * [limit](docs/sdks/ratelimit/README.md#limit) - TODO
 * [setOverride](docs/sdks/ratelimit/README.md#setoverride)
 * [getOverride](docs/sdks/ratelimit/README.md#getoverride)
+* [ratelimitListOverrides](docs/sdks/ratelimit/README.md#ratelimitlistoverrides) - List rate limit overrides
 * [deleteOverride](docs/sdks/ratelimit/README.md#deleteoverride)
 
 
@@ -268,10 +277,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`apisCreateApi`](docs/sdks/apis/README.md#createapi)
+- [`identitiesV2IdentitiesCreateIdentity`](docs/sdks/identities/README.md#v2identitiescreateidentity)
 - [`livenessCheck`](docs/sdks/liveness/README.md#check) - Liveness check
 - [`ratelimitDeleteOverride`](docs/sdks/ratelimit/README.md#deleteoverride)
 - [`ratelimitGetOverride`](docs/sdks/ratelimit/README.md#getoverride)
 - [`ratelimitLimit`](docs/sdks/ratelimit/README.md#limit) - TODO
+- [`ratelimitRatelimitListOverrides`](docs/sdks/ratelimit/README.md#ratelimitlistoverrides) - List rate limit overrides
 - [`ratelimitSetOverride`](docs/sdks/ratelimit/README.md#setoverride)
 
 </details>
@@ -293,9 +305,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   }, {
     retries: {
       strategy: "backoff",
@@ -338,9 +350,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -357,21 +369,26 @@ run();
 
 Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `limit` method may throw the following errors:
 
-| Error Type             | Status Code   | Content Type             |
-| ---------------------- | ------------- | ------------------------ |
-| errors.BadRequestError | 400           | application/problem+json |
-| errors.BaseError       | 401, 403, 404 | application/problem+json |
-| errors.BaseError       | 500           | application/problem+json |
-| errors.APIError        | 4XX, 5XX      | \*/\*                    |
+| Error Type                         | Status Code | Content Type     |
+| ---------------------------------- | ----------- | ---------------- |
+| errors.BadRequestErrorResponse     | 400         | application/json |
+| errors.UnauthorizedErrorResponse   | 401         | application/json |
+| errors.ForbiddenErrorResponse      | 403         | application/json |
+| errors.NotFoundErrorResponse       | 404         | application/json |
+| errors.InternalServerErrorResponse | 500         | application/json |
+| errors.APIError                    | 4XX, 5XX    | \*/\*            |
 
 If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
 
 ```typescript
 import { Unkey } from "@unkey/api";
 import {
-  BadRequestError,
-  BaseError,
+  BadRequestErrorResponse,
+  ForbiddenErrorResponse,
+  InternalServerErrorResponse,
+  NotFoundErrorResponse,
   SDKValidationError,
+  UnauthorizedErrorResponse,
 } from "@unkey/api/models/errors";
 
 const unkey = new Unkey({
@@ -383,9 +400,9 @@ async function run() {
   try {
     result = await unkey.ratelimit.limit({
       namespace: "sms.sign_up",
-      duration: 455106,
+      duration: 711276,
       identifier: "<value>",
-      limit: 568662,
+      limit: 581877,
     });
 
     // Handle the result
@@ -400,18 +417,28 @@ async function run() {
         console.error(err.rawValue);
         return;
       }
-      case (err instanceof BadRequestError): {
-        // Handle err.data$: BadRequestErrorData
+      case (err instanceof BadRequestErrorResponse): {
+        // Handle err.data$: BadRequestErrorResponseData
         console.error(err);
         return;
       }
-      case (err instanceof BaseError): {
-        // Handle err.data$: BaseErrorData
+      case (err instanceof UnauthorizedErrorResponse): {
+        // Handle err.data$: UnauthorizedErrorResponseData
         console.error(err);
         return;
       }
-      case (err instanceof BaseError): {
-        // Handle err.data$: BaseErrorData
+      case (err instanceof ForbiddenErrorResponse): {
+        // Handle err.data$: ForbiddenErrorResponseData
+        console.error(err);
+        return;
+      }
+      case (err instanceof NotFoundErrorResponse): {
+        // Handle err.data$: NotFoundErrorResponseData
+        console.error(err);
+        return;
+      }
+      case (err instanceof InternalServerErrorResponse): {
+        // Handle err.data$: InternalServerErrorResponseData
         console.error(err);
         return;
       }
@@ -457,9 +484,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result

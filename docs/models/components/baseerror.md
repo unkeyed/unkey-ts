@@ -3,16 +3,21 @@
 ## Example Usage
 
 ```typescript
-import { BaseError } from "@unkey/api/models/errors";
+import { BaseError } from "@unkey/api/models/components";
 
-// No examples available for this model
+let value: BaseError = {
+  detail: "Property foo is required but is missing.",
+  instance: "https://example.com/error-log/abc123",
+  status: 404,
+  title: "<value>",
+  type: "https://example.com/errors/example",
+};
 ```
 
 ## Fields
 
 | Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         | Example                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `requestId`                                                                                                         | *string*                                                                                                            | :heavy_check_mark:                                                                                                  | A unique id for this request. Please always provide this to support.                                                | req_123                                                                                                             |
 | `detail`                                                                                                            | *string*                                                                                                            | :heavy_check_mark:                                                                                                  | A human-readable explanation specific to this occurrence of the problem.                                            | Property foo is required but is missing.                                                                            |
 | `instance`                                                                                                          | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | A URI reference that identifies the specific occurrence of the problem.                                             | https://example.com/error-log/abc123                                                                                |
 | `status`                                                                                                            | *number*                                                                                                            | :heavy_check_mark:                                                                                                  | HTTP status code                                                                                                    | 404                                                                                                                 |

@@ -31,9 +31,11 @@ export function ratelimitDeleteOverride(
 ): APIPromise<
   Result<
     components.V2RatelimitDeleteOverrideResponseBody,
-    | errors.BadRequestError
-    | errors.BaseError
-    | errors.BaseError
+    | errors.BadRequestErrorResponse
+    | errors.UnauthorizedErrorResponse
+    | errors.ForbiddenErrorResponse
+    | errors.NotFoundErrorResponse
+    | errors.InternalServerErrorResponse
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,9 +60,11 @@ async function $do(
   [
     Result<
       components.V2RatelimitDeleteOverrideResponseBody,
-      | errors.BadRequestError
-      | errors.BaseError
-      | errors.BaseError
+      | errors.BadRequestErrorResponse
+      | errors.UnauthorizedErrorResponse
+      | errors.ForbiddenErrorResponse
+      | errors.NotFoundErrorResponse
+      | errors.InternalServerErrorResponse
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -152,9 +156,11 @@ async function $do(
 
   const [result] = await M.match<
     components.V2RatelimitDeleteOverrideResponseBody,
-    | errors.BadRequestError
-    | errors.BaseError
-    | errors.BaseError
+    | errors.BadRequestErrorResponse
+    | errors.UnauthorizedErrorResponse
+    | errors.ForbiddenErrorResponse
+    | errors.NotFoundErrorResponse
+    | errors.InternalServerErrorResponse
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -164,15 +170,11 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, components.V2RatelimitDeleteOverrideResponseBody$inboundSchema),
-    M.jsonErr(400, errors.BadRequestError$inboundSchema, {
-      ctype: "application/problem+json",
-    }),
-    M.jsonErr([401, 403, 404], errors.BaseError$inboundSchema, {
-      ctype: "application/problem+json",
-    }),
-    M.jsonErr(500, errors.BaseError$inboundSchema, {
-      ctype: "application/problem+json",
-    }),
+    M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
+    M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
+    M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
+    M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
+    M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
