@@ -6,28 +6,22 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  Meta,
+  Meta$inboundSchema,
+  Meta$Outbound,
+  Meta$outboundSchema,
+} from "./meta.js";
+import {
+  RatelimitGetOverrideResponseData,
+  RatelimitGetOverrideResponseData$inboundSchema,
+  RatelimitGetOverrideResponseData$Outbound,
+  RatelimitGetOverrideResponseData$outboundSchema,
+} from "./ratelimitgetoverrideresponsedata.js";
 
 export type V2RatelimitGetOverrideResponseBody = {
-  /**
-   * The id of the namespace.
-   */
-  namespaceId: string;
-  /**
-   * The id of the override.
-   */
-  overrideId: string;
-  /**
-   * The duration in milliseconds for the rate limit window.
-   */
-  duration: number;
-  /**
-   * Identifier of your user, this can be their userId, an email, an ip or anything else. Wildcards ( * ) can be used to match multiple identifiers, More info can be found at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
-   */
-  identifier: string;
-  /**
-   * The maximum number of requests allowed.
-   */
-  limit: number;
+  meta: Meta;
+  data: RatelimitGetOverrideResponseData;
 };
 
 /** @internal */
@@ -36,20 +30,14 @@ export const V2RatelimitGetOverrideResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  namespaceId: z.string(),
-  overrideId: z.string(),
-  duration: z.number().int(),
-  identifier: z.string(),
-  limit: z.number().int(),
+  meta: Meta$inboundSchema,
+  data: RatelimitGetOverrideResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2RatelimitGetOverrideResponseBody$Outbound = {
-  namespaceId: string;
-  overrideId: string;
-  duration: number;
-  identifier: string;
-  limit: number;
+  meta: Meta$Outbound;
+  data: RatelimitGetOverrideResponseData$Outbound;
 };
 
 /** @internal */
@@ -58,11 +46,8 @@ export const V2RatelimitGetOverrideResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2RatelimitGetOverrideResponseBody
 > = z.object({
-  namespaceId: z.string(),
-  overrideId: z.string(),
-  duration: z.number().int(),
-  identifier: z.string(),
-  limit: z.number().int(),
+  meta: Meta$outboundSchema,
+  data: RatelimitGetOverrideResponseData$outboundSchema,
 });
 
 /**

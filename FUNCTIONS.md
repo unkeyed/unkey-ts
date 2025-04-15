@@ -32,9 +32,9 @@ const unkey = new UnkeyCore({
 async function run() {
   const res = await ratelimitLimit(unkey, {
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   switch (true) {

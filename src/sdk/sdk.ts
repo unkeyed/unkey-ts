@@ -3,6 +3,8 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { Apis } from "./apis.js";
+import { Identities } from "./identities.js";
 import { Liveness } from "./liveness.js";
 import { Ratelimit } from "./ratelimit.js";
 
@@ -10,6 +12,16 @@ export class Unkey extends ClientSDK {
   private _ratelimit?: Ratelimit;
   get ratelimit(): Ratelimit {
     return (this._ratelimit ??= new Ratelimit(this._options));
+  }
+
+  private _identities?: Identities;
+  get identities(): Identities {
+    return (this._identities ??= new Identities(this._options));
+  }
+
+  private _apis?: Apis;
+  get apis(): Apis {
+    return (this._apis ??= new Apis(this._options));
   }
 
   private _liveness?: Liveness;
