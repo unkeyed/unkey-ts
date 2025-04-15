@@ -11,12 +11,15 @@ import {
   createRegisterResource,
   createRegisterResourceTemplate,
 } from "./resources.js";
-import { MCPScope, mcpScopes } from "./scopes.js";
+import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$apisCreateApi } from "./tools/apisCreateApi.js";
+import { tool$identitiesV2IdentitiesCreateIdentity } from "./tools/identitiesV2IdentitiesCreateIdentity.js";
 import { tool$livenessCheck } from "./tools/livenessCheck.js";
 import { tool$ratelimitDeleteOverride } from "./tools/ratelimitDeleteOverride.js";
 import { tool$ratelimitGetOverride } from "./tools/ratelimitGetOverride.js";
 import { tool$ratelimitLimit } from "./tools/ratelimitLimit.js";
+import { tool$ratelimitRatelimitListOverrides } from "./tools/ratelimitRatelimitListOverrides.js";
 import { tool$ratelimitSetOverride } from "./tools/ratelimitSetOverride.js";
 
 export function createMCPServer(deps: {
@@ -29,7 +32,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.0.0-alpha.5",
+    version: "2.0.0-alpha.6",
   });
 
   const client = new UnkeyCore({
@@ -38,7 +41,7 @@ export function createMCPServer(deps: {
     serverIdx: deps.serverIdx,
   });
 
-  const scopes = new Set(deps.scopes ?? mcpScopes);
+  const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
   const tool = createRegisterTool(
@@ -62,7 +65,10 @@ export function createMCPServer(deps: {
   tool(tool$ratelimitLimit);
   tool(tool$ratelimitSetOverride);
   tool(tool$ratelimitGetOverride);
+  tool(tool$ratelimitRatelimitListOverrides);
   tool(tool$ratelimitDeleteOverride);
+  tool(tool$identitiesV2IdentitiesCreateIdentity);
+  tool(tool$apisCreateApi);
   tool(tool$livenessCheck);
 
   return server;

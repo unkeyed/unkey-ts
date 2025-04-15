@@ -3,7 +3,12 @@
  */
 
 export * from "./apierror.js";
-export * from "./badrequesterror.js";
-export * from "./baseerror.js";
+export * from "./badrequesterrorresponse.js";
+export * from "./conflicterrorresponse.js";
+export * from "./forbiddenerrorresponse.js";
 export * from "./httpclienterrors.js";
+export * from "./internalservererrorresponse.js";
+export * from "./notfounderrorresponse.js";
+export * from "./preconditionfailederrorresponse.js";
 export * from "./sdkvalidationerror.js";
+export * from "./unauthorizederrorresponse.js";

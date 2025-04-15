@@ -6,12 +6,22 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  LivenessResponseData,
+  LivenessResponseData$inboundSchema,
+  LivenessResponseData$Outbound,
+  LivenessResponseData$outboundSchema,
+} from "./livenessresponsedata.js";
+import {
+  Meta,
+  Meta$inboundSchema,
+  Meta$Outbound,
+  Meta$outboundSchema,
+} from "./meta.js";
 
 export type V2LivenessResponseBody = {
-  /**
-   * Whether we're alive or not
-   */
-  message: string;
+  meta: Meta;
+  data: LivenessResponseData;
 };
 
 /** @internal */
@@ -20,12 +30,14 @@ export const V2LivenessResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  message: z.string(),
+  meta: Meta$inboundSchema,
+  data: LivenessResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2LivenessResponseBody$Outbound = {
-  message: string;
+  meta: Meta$Outbound;
+  data: LivenessResponseData$Outbound;
 };
 
 /** @internal */
@@ -34,7 +46,8 @@ export const V2LivenessResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2LivenessResponseBody
 > = z.object({
-  message: z.string(),
+  meta: Meta$outboundSchema,
+  data: LivenessResponseData$outboundSchema,
 });
 
 /**

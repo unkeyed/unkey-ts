@@ -34,8 +34,8 @@ export function livenessCheck(
 ): APIPromise<
   Result<
     components.V2LivenessResponseBody,
-    | errors.BaseError
-    | errors.BaseError
+    | errors.PreconditionFailedErrorResponse
+    | errors.InternalServerErrorResponse
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,8 +58,8 @@ async function $do(
   [
     Result<
       components.V2LivenessResponseBody,
-      | errors.BaseError
-      | errors.BaseError
+      | errors.PreconditionFailedErrorResponse
+      | errors.InternalServerErrorResponse
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -135,8 +135,8 @@ async function $do(
 
   const [result] = await M.match<
     components.V2LivenessResponseBody,
-    | errors.BaseError
-    | errors.BaseError
+    | errors.PreconditionFailedErrorResponse
+    | errors.InternalServerErrorResponse
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -146,12 +146,8 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, components.V2LivenessResponseBody$inboundSchema),
-    M.jsonErr(412, errors.BaseError$inboundSchema, {
-      ctype: "application/problem+json",
-    }),
-    M.jsonErr(500, errors.BaseError$inboundSchema, {
-      ctype: "application/problem+json",
-    }),
+    M.jsonErr(412, errors.PreconditionFailedErrorResponse$inboundSchema),
+    M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
