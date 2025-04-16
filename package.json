@@ -1,6 +1,6 @@
 {
   "name": "@unkey/api",
-  "version": "2.0.0-alpha.6",
+  "version": "2.0.0-alpha.7",
   "author": "Speakeasy",
   "license": "MIT",
   "type": "module",
@@ -22,6 +22,10 @@
     }
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unkeyed/unkey-ts.git"
+  },
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
     "build:mcp": "bun src/mcp-server/build.mts",

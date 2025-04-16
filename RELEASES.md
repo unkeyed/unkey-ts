@@ -35,3 +35,13 @@ Based on:
 - [typescript v2.0.0-alpha.6] .
 ### Releases
 - [NPM v2.0.0-alpha.6] https://www.npmjs.com/package/@unkey/api/v/2.0.0-alpha.6 - .
+
+## 2025-04-16 08:56:47
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.533.0 (2.578.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v2.0.0-alpha.7] .
+### Releases
+- [NPM v2.0.0-alpha.7] https://www.npmjs.com/package/@unkey/api/v/2.0.0-alpha.7 - .

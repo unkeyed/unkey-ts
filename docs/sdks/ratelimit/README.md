@@ -5,15 +5,13 @@
 
 ### Available Operations
 
-* [v1RatelimitLimit](#v1ratelimitlimit) - TODO
-* [ratelimitSetOverride](#ratelimitsetoverride)
-* [ratelimitGetOverride](#ratelimitgetoverride)
-* [ratelimitListOverrides](#ratelimitlistoverrides)
-* [ratelimitDeleteOverride](#ratelimitdeleteoverride)
+* [limit](#limit)
+* [setOverride](#setoverride)
+* [getOverride](#getoverride)
+* [listOverrides](#listoverrides)
+* [deleteOverride](#deleteoverride)
 
-## v1RatelimitLimit
-
-TODO
+## limit
 
 ### Example Usage
 
@@ -25,11 +23,11 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.v1RatelimitLimit({
+  const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -45,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitV1RatelimitLimit } from "@unkey/api/funcs/ratelimitV1RatelimitLimit.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -54,11 +52,11 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await ratelimitV1RatelimitLimit(unkey, {
+  const res = await ratelimitLimit(unkey, {
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   if (!res.ok) {
@@ -98,7 +96,7 @@ run();
 | errors.InternalServerErrorResponse | 500                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
-## ratelimitSetOverride
+## setOverride
 
 ### Example Usage
 
@@ -110,7 +108,7 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.ratelimitSetOverride({
+  const result = await unkey.ratelimit.setOverride({
     duration: 629394,
     identifier: "<value>",
     limit: 925291,
@@ -129,7 +127,7 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitRatelimitSetOverride } from "@unkey/api/funcs/ratelimitRatelimitSetOverride.js";
+import { ratelimitSetOverride } from "@unkey/api/funcs/ratelimitSetOverride.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -138,7 +136,7 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await ratelimitRatelimitSetOverride(unkey, {
+  const res = await ratelimitSetOverride(unkey, {
     duration: 629394,
     identifier: "<value>",
     limit: 925291,
@@ -181,7 +179,7 @@ run();
 | errors.InternalServerErrorResponse | 500                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
-## ratelimitGetOverride
+## getOverride
 
 ### Example Usage
 
@@ -193,7 +191,7 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.ratelimitGetOverride({
+  const result = await unkey.ratelimit.getOverride({
     identifier: "<value>",
   });
 
@@ -210,7 +208,7 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitRatelimitGetOverride } from "@unkey/api/funcs/ratelimitRatelimitGetOverride.js";
+import { ratelimitGetOverride } from "@unkey/api/funcs/ratelimitGetOverride.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -219,7 +217,7 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await ratelimitRatelimitGetOverride(unkey, {
+  const res = await ratelimitGetOverride(unkey, {
     identifier: "<value>",
   });
 
@@ -260,7 +258,7 @@ run();
 | errors.InternalServerErrorResponse | 500                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
-## ratelimitListOverrides
+## listOverrides
 
 ### Example Usage
 
@@ -272,7 +270,7 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.ratelimitListOverrides({});
+  const result = await unkey.ratelimit.listOverrides({});
 
   // Handle the result
   console.log(result);
@@ -287,7 +285,7 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitRatelimitListOverrides } from "@unkey/api/funcs/ratelimitRatelimitListOverrides.js";
+import { ratelimitListOverrides } from "@unkey/api/funcs/ratelimitListOverrides.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -296,7 +294,7 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await ratelimitRatelimitListOverrides(unkey, {});
+  const res = await ratelimitListOverrides(unkey, {});
 
   if (!res.ok) {
     throw res.error;
@@ -335,7 +333,7 @@ run();
 | errors.InternalServerErrorResponse | 500                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
-## ratelimitDeleteOverride
+## deleteOverride
 
 ### Example Usage
 
@@ -347,7 +345,7 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.ratelimitDeleteOverride({
+  const result = await unkey.ratelimit.deleteOverride({
     identifier: "<value>",
   });
 
@@ -364,7 +362,7 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitRatelimitDeleteOverride } from "@unkey/api/funcs/ratelimitRatelimitDeleteOverride.js";
+import { ratelimitDeleteOverride } from "@unkey/api/funcs/ratelimitDeleteOverride.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -373,7 +371,7 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await ratelimitRatelimitDeleteOverride(unkey, {
+  const res = await ratelimitDeleteOverride(unkey, {
     identifier: "<value>",
   });
 
