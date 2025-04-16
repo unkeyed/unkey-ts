@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [v2IdentitiesCreateIdentity](#v2identitiescreateidentity)
+* [createIdentity](#createidentity)
 
-## v2IdentitiesCreateIdentity
+## createIdentity
 
 ### Example Usage
 
@@ -19,7 +19,7 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.identities.v2IdentitiesCreateIdentity({
+  const result = await unkey.identities.createIdentity({
     externalId: "user_123",
   });
 
@@ -36,7 +36,7 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { identitiesV2IdentitiesCreateIdentity } from "@unkey/api/funcs/identitiesV2IdentitiesCreateIdentity.js";
+import { identitiesCreateIdentity } from "@unkey/api/funcs/identitiesCreateIdentity.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -45,7 +45,7 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await identitiesV2IdentitiesCreateIdentity(unkey, {
+  const res = await identitiesCreateIdentity(unkey, {
     externalId: "user_123",
   });
 

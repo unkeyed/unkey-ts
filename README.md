@@ -180,11 +180,11 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.v1RatelimitLimit({
+  const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -216,11 +216,11 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.v1RatelimitLimit({
+  const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -244,7 +244,7 @@ run();
 
 ### [identities](docs/sdks/identities/README.md)
 
-* [v2IdentitiesCreateIdentity](docs/sdks/identities/README.md#v2identitiescreateidentity)
+* [createIdentity](docs/sdks/identities/README.md#createidentity)
 
 ### [liveness](docs/sdks/liveness/README.md)
 
@@ -252,11 +252,11 @@ run();
 
 ### [ratelimit](docs/sdks/ratelimit/README.md)
 
-* [v1RatelimitLimit](docs/sdks/ratelimit/README.md#v1ratelimitlimit) - TODO
-* [ratelimitSetOverride](docs/sdks/ratelimit/README.md#ratelimitsetoverride)
-* [ratelimitGetOverride](docs/sdks/ratelimit/README.md#ratelimitgetoverride)
-* [ratelimitListOverrides](docs/sdks/ratelimit/README.md#ratelimitlistoverrides)
-* [ratelimitDeleteOverride](docs/sdks/ratelimit/README.md#ratelimitdeleteoverride)
+* [limit](docs/sdks/ratelimit/README.md#limit)
+* [setOverride](docs/sdks/ratelimit/README.md#setoverride)
+* [getOverride](docs/sdks/ratelimit/README.md#getoverride)
+* [listOverrides](docs/sdks/ratelimit/README.md#listoverrides)
+* [deleteOverride](docs/sdks/ratelimit/README.md#deleteoverride)
 
 
 </details>
@@ -278,13 +278,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 <summary>Available standalone functions</summary>
 
 - [`apisCreateApi`](docs/sdks/apis/README.md#createapi)
-- [`identitiesV2IdentitiesCreateIdentity`](docs/sdks/identities/README.md#v2identitiescreateidentity)
+- [`identitiesCreateIdentity`](docs/sdks/identities/README.md#createidentity)
 - [`livenessLiveness`](docs/sdks/liveness/README.md#liveness) - Liveness check
-- [`ratelimitRatelimitDeleteOverride`](docs/sdks/ratelimit/README.md#ratelimitdeleteoverride)
-- [`ratelimitRatelimitGetOverride`](docs/sdks/ratelimit/README.md#ratelimitgetoverride)
-- [`ratelimitRatelimitListOverrides`](docs/sdks/ratelimit/README.md#ratelimitlistoverrides)
-- [`ratelimitRatelimitSetOverride`](docs/sdks/ratelimit/README.md#ratelimitsetoverride)
-- [`ratelimitV1RatelimitLimit`](docs/sdks/ratelimit/README.md#v1ratelimitlimit) - TODO
+- [`ratelimitDeleteOverride`](docs/sdks/ratelimit/README.md#deleteoverride)
+- [`ratelimitGetOverride`](docs/sdks/ratelimit/README.md#getoverride)
+- [`ratelimitLimit`](docs/sdks/ratelimit/README.md#limit)
+- [`ratelimitListOverrides`](docs/sdks/ratelimit/README.md#listoverrides)
+- [`ratelimitSetOverride`](docs/sdks/ratelimit/README.md#setoverride)
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -303,11 +303,11 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.v1RatelimitLimit({
+  const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   }, {
     retries: {
       strategy: "backoff",
@@ -348,11 +348,11 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.v1RatelimitLimit({
+  const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -367,7 +367,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `v1RatelimitLimit` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `limit` method may throw the following errors:
 
 | Error Type                         | Status Code | Content Type     |
 | ---------------------------------- | ----------- | ---------------- |
@@ -398,11 +398,11 @@ const unkey = new Unkey({
 async function run() {
   let result;
   try {
-    result = await unkey.ratelimit.v1RatelimitLimit({
+    result = await unkey.ratelimit.limit({
       namespace: "sms.sign_up",
-      duration: 455106,
+      duration: 711276,
       identifier: "<value>",
-      limit: 568662,
+      limit: 581877,
     });
 
     // Handle the result
@@ -482,11 +482,11 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.v1RatelimitLimit({
+  const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result

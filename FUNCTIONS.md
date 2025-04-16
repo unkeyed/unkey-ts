@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitV1RatelimitLimit } from "@unkey/api/funcs/ratelimitV1RatelimitLimit.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
 import { SDKValidationError } from "@unkey/api/models/errors/sdkvalidationerror.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
@@ -30,11 +30,11 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await ratelimitV1RatelimitLimit(unkey, {
+  const res = await ratelimitLimit(unkey, {
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   switch (true) {

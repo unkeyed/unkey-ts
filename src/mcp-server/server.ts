@@ -14,13 +14,13 @@ import {
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$apisCreateApi } from "./tools/apisCreateApi.js";
-import { tool$identitiesV2IdentitiesCreateIdentity } from "./tools/identitiesV2IdentitiesCreateIdentity.js";
+import { tool$identitiesCreateIdentity } from "./tools/identitiesCreateIdentity.js";
 import { tool$livenessLiveness } from "./tools/livenessLiveness.js";
-import { tool$ratelimitRatelimitDeleteOverride } from "./tools/ratelimitRatelimitDeleteOverride.js";
-import { tool$ratelimitRatelimitGetOverride } from "./tools/ratelimitRatelimitGetOverride.js";
-import { tool$ratelimitRatelimitListOverrides } from "./tools/ratelimitRatelimitListOverrides.js";
-import { tool$ratelimitRatelimitSetOverride } from "./tools/ratelimitRatelimitSetOverride.js";
-import { tool$ratelimitV1RatelimitLimit } from "./tools/ratelimitV1RatelimitLimit.js";
+import { tool$ratelimitDeleteOverride } from "./tools/ratelimitDeleteOverride.js";
+import { tool$ratelimitGetOverride } from "./tools/ratelimitGetOverride.js";
+import { tool$ratelimitLimit } from "./tools/ratelimitLimit.js";
+import { tool$ratelimitListOverrides } from "./tools/ratelimitListOverrides.js";
+import { tool$ratelimitSetOverride } from "./tools/ratelimitSetOverride.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -32,7 +32,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.0.0-alpha.6",
+    version: "2.0.0-alpha.7",
   });
 
   const client = new UnkeyCore({
@@ -62,12 +62,12 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
-  tool(tool$ratelimitV1RatelimitLimit);
-  tool(tool$ratelimitRatelimitSetOverride);
-  tool(tool$ratelimitRatelimitGetOverride);
-  tool(tool$ratelimitRatelimitListOverrides);
-  tool(tool$ratelimitRatelimitDeleteOverride);
-  tool(tool$identitiesV2IdentitiesCreateIdentity);
+  tool(tool$ratelimitLimit);
+  tool(tool$ratelimitSetOverride);
+  tool(tool$ratelimitGetOverride);
+  tool(tool$ratelimitListOverrides);
+  tool(tool$ratelimitDeleteOverride);
+  tool(tool$identitiesCreateIdentity);
   tool(tool$apisCreateApi);
   tool(tool$livenessLiveness);
 
