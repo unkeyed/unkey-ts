@@ -5,14 +5,13 @@
 
 ### Available Operations
 
-* [limit](#limit) - TODO
+* [limit](#limit)
 * [setOverride](#setoverride)
 * [getOverride](#getoverride)
+* [listOverrides](#listoverrides)
 * [deleteOverride](#deleteoverride)
 
 ## limit
-
-TODO
 
 ### Example Usage
 
@@ -26,9 +25,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.ratelimit.limit({
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   // Handle the result
@@ -55,9 +54,9 @@ const unkey = new UnkeyCore({
 async function run() {
   const res = await ratelimitLimit(unkey, {
     namespace: "sms.sign_up",
-    duration: 455106,
+    duration: 711276,
     identifier: "<value>",
-    limit: 568662,
+    limit: 581877,
   });
 
   if (!res.ok) {
@@ -88,12 +87,14 @@ run();
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.BadRequestError   | 400                      | application/problem+json |
-| errors.BaseError         | 401, 403, 404            | application/problem+json |
-| errors.BaseError         | 500                      | application/problem+json |
-| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## setOverride
 
@@ -169,12 +170,14 @@ run();
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.BadRequestError   | 400                      | application/problem+json |
-| errors.BaseError         | 401, 403, 404            | application/problem+json |
-| errors.BaseError         | 500                      | application/problem+json |
-| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## getOverride
 
@@ -246,12 +249,89 @@ run();
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.BadRequestError   | 400                      | application/problem+json |
-| errors.BaseError         | 401, 403, 404            | application/problem+json |
-| errors.BaseError         | 500                      | application/problem+json |
-| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+
+## listOverrides
+
+### Example Usage
+
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: "UNKEY_ROOT_KEY",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listOverrides({});
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListOverrides } from "@unkey/api/funcs/ratelimitListOverrides.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: "UNKEY_ROOT_KEY",
+});
+
+async function run() {
+  const res = await ratelimitListOverrides(unkey, {});
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2RatelimitListOverridesRequestBody](../../models/components/v2ratelimitlistoverridesrequestbody.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2RatelimitListOverridesResponseBody](../../models/components/v2ratelimitlistoverridesresponsebody.md)\>**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## deleteOverride
 
@@ -323,9 +403,11 @@ run();
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.BadRequestError   | 400                      | application/problem+json |
-| errors.BaseError         | 401, 403, 404            | application/problem+json |
-| errors.BaseError         | 500                      | application/problem+json |
-| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |

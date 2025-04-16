@@ -6,12 +6,18 @@
 import { V2LivenessResponseBody } from "@unkey/api/models/components";
 
 let value: V2LivenessResponseBody = {
-  message: "OK",
+  meta: {
+    requestId: "req_123",
+  },
+  data: {
+    message: "OK",
+  },
 };
 ```
 
 ## Fields
 
-| Field                      | Type                       | Required                   | Description                | Example                    |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `message`                  | *string*                   | :heavy_check_mark:         | Whether we're alive or not | OK                         |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `meta`                                                                             | [components.Meta](../../models/components/meta.md)                                 | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `data`                                                                             | [components.LivenessResponseData](../../models/components/livenessresponsedata.md) | :heavy_check_mark:                                                                 | N/A                                                                                |

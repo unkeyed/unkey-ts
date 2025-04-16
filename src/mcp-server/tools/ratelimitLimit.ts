@@ -12,7 +12,7 @@ const args = {
 
 export const tool$ratelimitLimit: ToolDefinition<typeof args> = {
   name: "ratelimit-limit",
-  description: `TODO`,
+  description: ``,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await ratelimitLimit(

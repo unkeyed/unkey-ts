@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [check](#check) - Liveness check
+* [liveness](#liveness) - Liveness check
 
-## check
+## liveness
 
 This endpoint checks if the service is alive.
 
@@ -21,7 +21,7 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.liveness.check();
+  const result = await unkey.liveness.liveness();
 
   // Handle the result
   console.log(result);
@@ -36,7 +36,7 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { livenessCheck } from "@unkey/api/funcs/livenessCheck.js";
+import { livenessLiveness } from "@unkey/api/funcs/livenessLiveness.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -45,7 +45,7 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await livenessCheck(unkey);
+  const res = await livenessLiveness(unkey);
 
   if (!res.ok) {
     throw res.error;
@@ -74,8 +74,8 @@ run();
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.BaseError         | 412                      | application/problem+json |
-| errors.BaseError         | 500                      | application/problem+json |
-| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |

@@ -3,8 +3,10 @@
  */
 
 import { UnkeyCore } from "../core.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -22,20 +24,18 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-/**
- * Liveness check
- *
- * @remarks
- * This endpoint checks if the service is alive.
- */
-export function livenessCheck(
+export function identitiesCreateIdentity(
   client: UnkeyCore,
+  request: components.V2IdentitiesCreateIdentityRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.V2LivenessResponseBody,
-    | errors.BaseError
-    | errors.BaseError
+    components.V2IdentitiesCreateIdentityResponseBody,
+    | errors.BadRequestErrorResponse
+    | errors.UnauthorizedErrorResponse
+    | errors.ForbiddenErrorResponse
+    | errors.ConflictErrorResponse
+    | errors.InternalServerErrorResponse
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -47,19 +47,24 @@ export function livenessCheck(
 > {
   return new APIPromise($do(
     client,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: UnkeyCore,
+  request: components.V2IdentitiesCreateIdentityRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.V2LivenessResponseBody,
-      | errors.BaseError
-      | errors.BaseError
+      components.V2IdentitiesCreateIdentityResponseBody,
+      | errors.BadRequestErrorResponse
+      | errors.UnauthorizedErrorResponse
+      | errors.ForbiddenErrorResponse
+      | errors.ConflictErrorResponse
+      | errors.InternalServerErrorResponse
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -71,9 +76,24 @@ async function $do(
     APICall,
   ]
 > {
-  const path = pathToFunc("/v2/liveness")();
+  const parsed = safeParse(
+    request,
+    (value) =>
+      components.V2IdentitiesCreateIdentityRequestBody$outboundSchema.parse(
+        value,
+      ),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return [parsed, { status: "invalid" }];
+  }
+  const payload = parsed.value;
+  const body = encodeJSON("body", payload, { explode: true });
+
+  const path = pathToFunc("/v2/identities.createIdentity")();
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -83,7 +103,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "liveness",
+    operationID: "identities.createIdentity",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -107,10 +127,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -120,7 +141,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["412", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "403", "409", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -134,9 +155,12 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.V2LivenessResponseBody,
-    | errors.BaseError
-    | errors.BaseError
+    components.V2IdentitiesCreateIdentityResponseBody,
+    | errors.BadRequestErrorResponse
+    | errors.UnauthorizedErrorResponse
+    | errors.ForbiddenErrorResponse
+    | errors.ConflictErrorResponse
+    | errors.InternalServerErrorResponse
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -145,11 +169,23 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.V2LivenessResponseBody$inboundSchema),
-    M.jsonErr(412, errors.BaseError$inboundSchema, {
+    M.json(
+      200,
+      components.V2IdentitiesCreateIdentityResponseBody$inboundSchema,
+    ),
+    M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
-    M.jsonErr(500, errors.BaseError$inboundSchema, {
+    M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
+    M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
+    M.jsonErr(409, errors.ConflictErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
+    M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema, {
       ctype: "application/problem+json",
     }),
     M.fail("4XX"),

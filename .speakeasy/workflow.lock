@@ -1,9 +1,9 @@
-speakeasyVersion: 1.527.1
+speakeasyVersion: 1.533.0
 sources:
     Unkey API:
         sourceNamespace: unkey-api
-        sourceRevisionDigest: sha256:e1d115461bc53fbff48cbf74e110ec3548b6aba76f4572d5a3baebeb368b4e62
-        sourceBlobDigest: sha256:411d7a08cddea23554e812add92b683e49ce24e0ab269bd188bc98ffaf5763d9
+        sourceRevisionDigest: sha256:f3f803d77ef66147969354e90ef03efd37f52b7675628f199c8181ef1770a8a9
+        sourceBlobDigest: sha256:ca8d6455b76ea23e06ccd91a210ebddeb8898a549c91a83916f8cfa612701594
         tags:
             - latest
             - 2.0.0
@@ -11,19 +11,17 @@ targets:
     unkey:
         source: Unkey API
         sourceNamespace: unkey-api
-        sourceRevisionDigest: sha256:e1d115461bc53fbff48cbf74e110ec3548b6aba76f4572d5a3baebeb368b4e62
-        sourceBlobDigest: sha256:411d7a08cddea23554e812add92b683e49ce24e0ab269bd188bc98ffaf5763d9
+        sourceRevisionDigest: sha256:f3f803d77ef66147969354e90ef03efd37f52b7675628f199c8181ef1770a8a9
+        sourceBlobDigest: sha256:ca8d6455b76ea23e06ccd91a210ebddeb8898a549c91a83916f8cfa612701594
         codeSamplesNamespace: unkey-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:946255c559bb8dee685b500169ecde3cc95bc72a6b0b4a9c4e2bed38c5d4cead
+        codeSamplesRevisionDigest: sha256:b9ad8690c0faf2d38bc9fb101f6130171f6ff79419b768bee6273cd0089eaf04
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         Unkey API:
             inputs:
-                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json
-            overlays:
-                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+                - location: ../unkey/go/apps/api/openapi/openapi.json
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/unkey-api
     targets:

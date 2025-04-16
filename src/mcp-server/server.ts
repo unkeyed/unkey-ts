@@ -11,12 +11,15 @@ import {
   createRegisterResource,
   createRegisterResourceTemplate,
 } from "./resources.js";
-import { MCPScope, mcpScopes } from "./scopes.js";
+import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
-import { tool$livenessCheck } from "./tools/livenessCheck.js";
+import { tool$apisCreateApi } from "./tools/apisCreateApi.js";
+import { tool$identitiesCreateIdentity } from "./tools/identitiesCreateIdentity.js";
+import { tool$livenessLiveness } from "./tools/livenessLiveness.js";
 import { tool$ratelimitDeleteOverride } from "./tools/ratelimitDeleteOverride.js";
 import { tool$ratelimitGetOverride } from "./tools/ratelimitGetOverride.js";
 import { tool$ratelimitLimit } from "./tools/ratelimitLimit.js";
+import { tool$ratelimitListOverrides } from "./tools/ratelimitListOverrides.js";
 import { tool$ratelimitSetOverride } from "./tools/ratelimitSetOverride.js";
 
 export function createMCPServer(deps: {
@@ -38,7 +41,7 @@ export function createMCPServer(deps: {
     serverIdx: deps.serverIdx,
   });
 
-  const scopes = new Set(deps.scopes ?? mcpScopes);
+  const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
   const tool = createRegisterTool(
@@ -62,8 +65,11 @@ export function createMCPServer(deps: {
   tool(tool$ratelimitLimit);
   tool(tool$ratelimitSetOverride);
   tool(tool$ratelimitGetOverride);
+  tool(tool$ratelimitListOverrides);
   tool(tool$ratelimitDeleteOverride);
-  tool(tool$livenessCheck);
+  tool(tool$identitiesCreateIdentity);
+  tool(tool$apisCreateApi);
+  tool(tool$livenessLiveness);
 
   return server;
 }
