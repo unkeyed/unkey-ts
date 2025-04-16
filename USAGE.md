@@ -7,11 +7,11 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.ratelimit.limit({
+  const result = await unkey.ratelimit.v1RatelimitLimit({
     namespace: "sms.sign_up",
-    duration: 711276,
+    duration: 455106,
     identifier: "<value>",
-    limit: 581877,
+    limit: 568662,
   });
 
   // Handle the result

@@ -1,21 +1,21 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-  Unkey API:
-    inputs:
-      - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json
-    registry:
-      location: registry.speakeasyapi.dev/unkey/unkey/unkey-api
+    Unkey API:
+        inputs:
+            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/unkey/unkey/unkey-api
 targets:
-  unkey:
-    target: typescript
-    source: Unkey API
-    publish:
-      npm:
-        token: $npm_token
-    codeSamples:
-      registry:
-        location: registry.speakeasyapi.dev/unkey/unkey/unkey-api-typescript-code-samples
-      labelOverride:
-        fixedValue: Typescript (SDK)
-      blocking: false
+    unkey:
+        target: typescript
+        source: Unkey API
+        publish:
+            npm:
+                token: $npm_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/unkey/unkey/unkey-api-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false
