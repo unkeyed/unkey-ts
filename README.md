@@ -245,6 +245,7 @@ run();
 ### [identities](docs/sdks/identities/README.md)
 
 * [createIdentity](docs/sdks/identities/README.md#createidentity)
+* [deleteIdentity](docs/sdks/identities/README.md#deleteidentity)
 
 ### [liveness](docs/sdks/liveness/README.md)
 
@@ -279,6 +280,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`apisCreateApi`](docs/sdks/apis/README.md#createapi)
 - [`identitiesCreateIdentity`](docs/sdks/identities/README.md#createidentity)
+- [`identitiesDeleteIdentity`](docs/sdks/identities/README.md#deleteidentity)
 - [`livenessLiveness`](docs/sdks/liveness/README.md#liveness) - Liveness check
 - [`ratelimitDeleteOverride`](docs/sdks/ratelimit/README.md#deleteoverride)
 - [`ratelimitGetOverride`](docs/sdks/ratelimit/README.md#getoverride)

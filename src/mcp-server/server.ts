@@ -15,6 +15,7 @@ import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$apisCreateApi } from "./tools/apisCreateApi.js";
 import { tool$identitiesCreateIdentity } from "./tools/identitiesCreateIdentity.js";
+import { tool$identitiesDeleteIdentity } from "./tools/identitiesDeleteIdentity.js";
 import { tool$livenessLiveness } from "./tools/livenessLiveness.js";
 import { tool$ratelimitDeleteOverride } from "./tools/ratelimitDeleteOverride.js";
 import { tool$ratelimitGetOverride } from "./tools/ratelimitGetOverride.js";
@@ -32,7 +33,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.0.0-alpha.7",
+    version: "2.0.0-alpha.8",
   });
 
   const client = new UnkeyCore({
@@ -68,6 +69,7 @@ export function createMCPServer(deps: {
   tool(tool$ratelimitListOverrides);
   tool(tool$ratelimitDeleteOverride);
   tool(tool$identitiesCreateIdentity);
+  tool(tool$identitiesDeleteIdentity);
   tool(tool$apisCreateApi);
   tool(tool$livenessLiveness);
 

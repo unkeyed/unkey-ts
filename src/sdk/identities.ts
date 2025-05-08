@@ -3,6 +3,7 @@
  */
 
 import { identitiesCreateIdentity } from "../funcs/identitiesCreateIdentity.js";
+import { identitiesDeleteIdentity } from "../funcs/identitiesDeleteIdentity.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -13,6 +14,17 @@ export class Identities extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.V2IdentitiesCreateIdentityResponseBody> {
     return unwrapAsync(identitiesCreateIdentity(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async deleteIdentity(
+    request: components.V2IdentitiesDeleteIdentityRequestBody,
+    options?: RequestOptions,
+  ): Promise<components.V2IdentitiesDeleteIdentityResponseBody> {
+    return unwrapAsync(identitiesDeleteIdentity(
       this,
       request,
       options,

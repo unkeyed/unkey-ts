@@ -7,7 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type V2Ratelimit = {
+export type Ratelimit = {
   /**
    * The name of this limit. You will need to use this again when verifying a key.
    */
@@ -23,8 +23,8 @@ export type V2Ratelimit = {
 };
 
 /** @internal */
-export const V2Ratelimit$inboundSchema: z.ZodType<
-  V2Ratelimit,
+export const Ratelimit$inboundSchema: z.ZodType<
+  Ratelimit,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -34,17 +34,17 @@ export const V2Ratelimit$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type V2Ratelimit$Outbound = {
+export type Ratelimit$Outbound = {
   name: string;
   limit: number;
   duration: number;
 };
 
 /** @internal */
-export const V2Ratelimit$outboundSchema: z.ZodType<
-  V2Ratelimit$Outbound,
+export const Ratelimit$outboundSchema: z.ZodType<
+  Ratelimit$Outbound,
   z.ZodTypeDef,
-  V2Ratelimit
+  Ratelimit
 > = z.object({
   name: z.string(),
   limit: z.number().int(),
@@ -55,25 +55,25 @@ export const V2Ratelimit$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace V2Ratelimit$ {
-  /** @deprecated use `V2Ratelimit$inboundSchema` instead. */
-  export const inboundSchema = V2Ratelimit$inboundSchema;
-  /** @deprecated use `V2Ratelimit$outboundSchema` instead. */
-  export const outboundSchema = V2Ratelimit$outboundSchema;
-  /** @deprecated use `V2Ratelimit$Outbound` instead. */
-  export type Outbound = V2Ratelimit$Outbound;
+export namespace Ratelimit$ {
+  /** @deprecated use `Ratelimit$inboundSchema` instead. */
+  export const inboundSchema = Ratelimit$inboundSchema;
+  /** @deprecated use `Ratelimit$outboundSchema` instead. */
+  export const outboundSchema = Ratelimit$outboundSchema;
+  /** @deprecated use `Ratelimit$Outbound` instead. */
+  export type Outbound = Ratelimit$Outbound;
 }
 
-export function v2RatelimitToJSON(v2Ratelimit: V2Ratelimit): string {
-  return JSON.stringify(V2Ratelimit$outboundSchema.parse(v2Ratelimit));
+export function ratelimitToJSON(ratelimit: Ratelimit): string {
+  return JSON.stringify(Ratelimit$outboundSchema.parse(ratelimit));
 }
 
-export function v2RatelimitFromJSON(
+export function ratelimitFromJSON(
   jsonString: string,
-): SafeParseResult<V2Ratelimit, SDKValidationError> {
+): SafeParseResult<Ratelimit, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => V2Ratelimit$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2Ratelimit' from JSON`,
+    (x) => Ratelimit$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Ratelimit' from JSON`,
   );
 }
