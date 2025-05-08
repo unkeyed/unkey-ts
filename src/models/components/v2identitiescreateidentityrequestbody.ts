@@ -7,11 +7,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  V2Ratelimit,
-  V2Ratelimit$inboundSchema,
-  V2Ratelimit$Outbound,
-  V2Ratelimit$outboundSchema,
-} from "./v2ratelimit.js";
+  Ratelimit,
+  Ratelimit$inboundSchema,
+  Ratelimit$Outbound,
+  Ratelimit$outboundSchema,
+} from "./ratelimit.js";
 
 /**
  * Attach metadata to this identity that you need to have access to when verifying a key.
@@ -49,7 +49,7 @@ export type V2IdentitiesCreateIdentityRequestBody = {
    *
    * When verifying keys, you can specify which limits you want to use and all keys attached to this identity, will share the limits.
    */
-  ratelimits?: Array<V2Ratelimit> | undefined;
+  ratelimits?: Array<Ratelimit> | undefined;
 };
 
 /** @internal */
@@ -121,14 +121,14 @@ export const V2IdentitiesCreateIdentityRequestBody$inboundSchema: z.ZodType<
   externalId: z.string(),
   meta: z.lazy(() => V2IdentitiesCreateIdentityRequestBodyMeta$inboundSchema)
     .optional(),
-  ratelimits: z.array(V2Ratelimit$inboundSchema).optional(),
+  ratelimits: z.array(Ratelimit$inboundSchema).optional(),
 });
 
 /** @internal */
 export type V2IdentitiesCreateIdentityRequestBody$Outbound = {
   externalId: string;
   meta?: V2IdentitiesCreateIdentityRequestBodyMeta$Outbound | undefined;
-  ratelimits?: Array<V2Ratelimit$Outbound> | undefined;
+  ratelimits?: Array<Ratelimit$Outbound> | undefined;
 };
 
 /** @internal */
@@ -140,7 +140,7 @@ export const V2IdentitiesCreateIdentityRequestBody$outboundSchema: z.ZodType<
   externalId: z.string(),
   meta: z.lazy(() => V2IdentitiesCreateIdentityRequestBodyMeta$outboundSchema)
     .optional(),
-  ratelimits: z.array(V2Ratelimit$outboundSchema).optional(),
+  ratelimits: z.array(Ratelimit$outboundSchema).optional(),
 });
 
 /**
